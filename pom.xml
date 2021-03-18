@@ -71,6 +71,16 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>org.ifinal.auto</groupId>
+                <artifactId>auto-service</artifactId>
+                <version>${auto.service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ifinal.auto</groupId>
+                <artifactId>auto-spring</artifactId>
+                <version>${auto.service.version}</version>
+            </dependency>
             <!--  Final Boot -->
             <dependency>
                 <groupId>org.ifinal.finalframework.boot</groupId>
