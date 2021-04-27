@@ -2,26 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.ifinal.finalframework.parent</groupId>
+        <artifactId>final-projects-parent</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <groupId>org.ifinal.finalframework.boot</groupId>
     <artifactId>final-boot</artifactId>
-    <version>1.1.3-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <name>final-boot</name>
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
     <modules>
         <module>final-boot-starter</module>
-        <module>final-boot-starter-cache</module>
-        <module>final-boot-starter-data</module>
-        <module>final-boot-starter-dubbo</module>
         <module>final-boot-starter-entity</module>
+        <module>final-boot-starter-mybatis</module>
+        <module>final-boot-starter-service</module>
+        <module>final-boot-starter-redis</module>
+        <module>final-boot-starter-cache</module>
+        <module>final-boot-starter-sharding</module>
         <module>final-boot-starter-json</module>
         <module>final-boot-starter-logging</module>
         <module>final-boot-starter-monitor</module>
-        <module>final-boot-starter-mybatis</module>
-        <module>final-boot-starter-redis</module>
-        <module>final-boot-starter-service</module>
-        <module>final-boot-starter-sharding</module>
         <module>final-boot-starter-web</module>
     </modules>
 
@@ -29,9 +32,10 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <final.framework.version>1.1.3-SNAPSHOT</final.framework.version>
-        <final.annotation.version>1.1.3-SNAPSHOT</final.annotation.version>
-        <final.boot.version>1.1.3-SNAPSHOT</final.boot.version>
+        <final.annotation.version>1.2.0-SNAPSHOT</final.annotation.version>
+        <final.framework.version>1.2.0-SNAPSHOT</final.framework.version>
+        <final.data.version>1.2.0-SNAPSHOT</final.data.version>
+        <final.boot.version>1.2.0-SNAPSHOT</final.boot.version>
         <auto.service.version>1.0.0</auto.service.version>
         <auto.spring.version>1.0.0</auto.spring.version>
     </properties>
@@ -39,14 +43,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--Spring Boot-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.3.3.RELEASE</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
             <!--Final Annotation-->
             <dependency>
                 <groupId>org.ifinal.finalframework.annotation</groupId>
@@ -63,11 +59,11 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <!--Final Auto-->
+            <!--Final Data-->
             <dependency>
-                <groupId>org.ifinal.finalframework.auto</groupId>
-                <artifactId>final-auto</artifactId>
-                <version>${final.framework.version}</version>
+                <groupId>org.ifinal.finalframework.data</groupId>
+                <artifactId>final-data</artifactId>
+                <version>${final.data.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -95,16 +91,6 @@
             <dependency>
                 <groupId>org.ifinal.finalframework.boot</groupId>
                 <artifactId>final-boot-starter-redis</artifactId>
-                <version>${final.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
-                <artifactId>final-boot-starter-data</artifactId>
-                <version>${final.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
-                <artifactId>final-boot-starter-dubbo</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
@@ -174,4 +160,62 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>deploy</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <groupId>org.apache.maven.plugins</groupId>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                        <groupId>org.apache.maven.plugins</groupId>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>dmall</id>
+            <distributionManagement>
+                <repository>
+                    <id>dmall.com</id>
+                    <url>http://nexus.dmall.com:8081/nexus/content/repositories/3rd</url>
+                </repository>
+                <snapshotRepository>
+                    <id>dmall.com</id>
+                    <url>http://nexus.dmall.com:8081/nexus/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
 </project>
