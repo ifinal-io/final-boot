@@ -5,11 +5,11 @@
     <dependencies>
         <dependency>
             <artifactId>final-boot-starter</artifactId>
-            <groupId>org.ifinal.finalframework.boot</groupId>
+            <groupId>org.ifinalframework.boot</groupId>
         </dependency>
         <dependency>
             <artifactId>final-data-mybatis</artifactId>
-            <groupId>org.ifinal.finalframework.data</groupId>
+            <groupId>org.ifinalframework.data</groupId>
         </dependency>
     </dependencies>
 
@@ -17,8 +17,8 @@
 
     <parent>
         <artifactId>final-boot</artifactId>
-        <groupId>org.ifinal.finalframework.boot</groupId>
-        <version>1.2.0-SNAPSHOT</version>
+        <groupId>org.ifinalframework.boot</groupId>
+        <version>1.2.0-alpha</version>
     </parent>
 
 

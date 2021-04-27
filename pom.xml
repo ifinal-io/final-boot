@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.ifinal.finalframework.parent</groupId>
-        <artifactId>final-projects-parent</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <groupId>org.ifinalframework.project</groupId>
+        <artifactId>final-project</artifactId>
+        <version>1.2.0-alpha</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.ifinal.finalframework.boot</groupId>
+    <groupId>org.ifinalframework.boot</groupId>
     <artifactId>final-boot</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.0-alpha</version>
     <name>final-boot</name>
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
@@ -32,10 +32,10 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <final.annotation.version>1.2.0-SNAPSHOT</final.annotation.version>
-        <final.framework.version>1.2.0-SNAPSHOT</final.framework.version>
-        <final.data.version>1.2.0-SNAPSHOT</final.data.version>
-        <final.boot.version>1.2.0-SNAPSHOT</final.boot.version>
+        <final.annotation.version>${project.version}</final.annotation.version>
+        <final.framework.version>${project.version}</final.framework.version>
+        <final.data.version>${project.version}</final.data.version>
+        <final.boot.version>${project.version}</final.boot.version>
         <auto.service.version>1.0.0</auto.service.version>
         <auto.spring.version>1.0.0</auto.spring.version>
     </properties>
@@ -45,7 +45,7 @@
         <dependencies>
             <!--Final Annotation-->
             <dependency>
-                <groupId>org.ifinal.finalframework.annotation</groupId>
+                <groupId>org.ifinalframework.annotation</groupId>
                 <artifactId>final-annotation</artifactId>
                 <version>${final.annotation.version}</version>
                 <scope>import</scope>
@@ -53,7 +53,7 @@
             </dependency>
             <!--Final Framework-->
             <dependency>
-                <groupId>org.ifinal.finalframework</groupId>
+                <groupId>org.ifinalframework</groupId>
                 <artifactId>final-framework</artifactId>
                 <version>${final.framework.version}</version>
                 <scope>import</scope>
@@ -61,124 +61,109 @@
             </dependency>
             <!--Final Data-->
             <dependency>
-                <groupId>org.ifinal.finalframework.data</groupId>
+                <groupId>org.ifinalframework.data</groupId>
                 <artifactId>final-data</artifactId>
                 <version>${final.data.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>org.ifinal.auto</groupId>
-                <artifactId>auto-service</artifactId>
-                <version>${auto.service.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ifinal.auto</groupId>
-                <artifactId>auto-spring</artifactId>
-                <version>${auto.service.version}</version>
-            </dependency>
             <!--  Final Boot -->
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-cache</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-redis</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-entity</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-json</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-logging</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-monitor</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-mybatis</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-service</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-sharding</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.ifinal.finalframework.boot</groupId>
+                <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-web</artifactId>
                 <version>${final.boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <id>oss</id>
-            <name>oss-releases</name>
-            <url>https://oss.sonatype.org/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>oss-snapshots</id>
-            <name>oss-snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <profiles>
+        <profile>
+            <id>ci</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>oss</id>
+                    <name>oss-releases</name>
+                    <url>https://oss.sonatype.org/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>oss-snapshots</id>
+                    <name>oss-snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
         <profile>
             <id>deploy</id>
             <build>
                 <plugins>
+
                     <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <phase>package</phase>
-                            </execution>
-                        </executions>
                         <groupId>org.apache.maven.plugins</groupId>
-                    </plugin>
-                    <plugin>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
@@ -188,7 +173,6 @@
                                 <phase>verify</phase>
                             </execution>
                         </executions>
-                        <groupId>org.apache.maven.plugins</groupId>
                     </plugin>
                 </plugins>
             </build>
@@ -217,5 +201,41 @@
             </distributionManagement>
         </profile>
     </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
