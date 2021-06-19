@@ -68,6 +68,11 @@ public class LoggerEnvironmentPostProcessor implements EnvironmentPostProcessor 
             .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
         if (map.size() > 0) {
+            if (logger.isInfoEnabled()) {
+                for (final Entry<String, Object> entry : map.entrySet()) {
+                    logger.info("{}={}", entry.getKey(), entry.getValue());
+                }
+            }
             MapPropertySource propertySource = new MapPropertySource("logging property source", map);
             environment.getPropertySources().addLast(propertySource);
         }
