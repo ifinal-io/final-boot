@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?xml version="1.0" encoding="UTF-8"?><!--
   ~ Copyright 2020-2021 the original author or authors.
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -30,17 +29,19 @@
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
     <modules>
-        <module>final-boot-starter</module>
-        <module>final-boot-starter-entity</module>
-        <module>final-boot-starter-mybatis</module>
-        <module>final-boot-starter-service</module>
-        <module>final-boot-starter-redis</module>
-        <module>final-boot-starter-cache</module>
-        <module>final-boot-starter-sharding</module>
-        <module>final-boot-starter-json</module>
-        <module>final-boot-starter-logging</module>
-        <module>final-boot-starter-monitor</module>
-        <module>final-boot-starter-web</module>
+        <module>final-boot-core</module>
+        <!--Starters-->
+        <module>final-boot-starters/final-boot-starter</module>
+        <module>final-boot-starters/final-boot-starter-entity</module>
+        <module>final-boot-starters/final-boot-starter-mybatis</module>
+        <module>final-boot-starters/final-boot-starter-service</module>
+        <module>final-boot-starters/final-boot-starter-redis</module>
+        <module>final-boot-starters/final-boot-starter-cache</module>
+        <module>final-boot-starters/final-boot-starter-sharding</module>
+        <module>final-boot-starters/final-boot-starter-json</module>
+        <module>final-boot-starters/final-boot-starter-logging</module>
+        <module>final-boot-starters/final-boot-starter-monitor</module>
+        <module>final-boot-starters/final-boot-starter-web</module>
     </modules>
 
     <properties>
@@ -53,9 +54,25 @@
         <final.boot.version>1.2.1-SNAPSHOT</final.boot.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.ifinalframework.auto</groupId>
+            <artifactId>auto-spring</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
 
     <dependencyManagement>
         <dependencies>
+            <!--Final Auto-->
+            <dependency>
+                <groupId>org.ifinalframework.auto</groupId>
+                <artifactId>final-auto</artifactId>
+                <version>1.2.1-SNAPSHOT</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <!--Final Annotation-->
             <dependency>
                 <groupId>org.ifinalframework.annotation</groupId>
