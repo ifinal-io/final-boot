@@ -23,13 +23,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.ifinalframework.boot</groupId>
-    <artifactId>final-boot</artifactId>
+    <artifactId>final-boot-parent</artifactId>
     <version>1.2.1-SNAPSHOT</version>
-    <name>final-boot</name>
-    <description>Demo project for Spring Boot</description>
+    <name>final-boot-parent</name>
+    <description>Final Boot</description>
     <packaging>pom</packaging>
     <modules>
-        <module>final-boot-core</module>
+        <module>final-boot</module>
+        <module>final-boot-autoconfigure</module>
         <!--Starters-->
         <module>final-boot-starters/final-boot-starter</module>
         <module>final-boot-starters/final-boot-starter-entity</module>
@@ -99,7 +100,12 @@
             <!--  Final Boot -->
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
-                <artifactId>final-boot-core</artifactId>
+                <artifactId>final-boot</artifactId>
+                <version>1.2.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ifinalframework.boot</groupId>
+                <artifactId>final-boot-autoconfigure</artifactId>
                 <version>1.2.1-SNAPSHOT</version>
             </dependency>
             <dependency>
