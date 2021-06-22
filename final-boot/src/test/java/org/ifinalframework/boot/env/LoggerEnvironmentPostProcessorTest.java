@@ -47,8 +47,6 @@ class LoggerEnvironmentPostProcessorTest {
     @Test
     void postProcessEnvironment() {
 
-        when(environment.containsProperty(anyString())).thenReturn(false);
-
         when(environment.getPropertySources()).thenReturn(mutablePropertySources);
 
         postProcessor.postProcessEnvironment(environment, null);
