@@ -43,12 +43,12 @@ public class LoggerEnvironmentPostProcessor implements EnvironmentPostProcessor 
     /**
      * 默认的控制台日志格式
      */
-    private static final String DEFAULT_LOGGING_PATTERN_CONSOLE = "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr(%-36X{trace}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}";
+    private static final String DEFAULT_LOGGING_PATTERN_CONSOLE = "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr(%-36X{trace}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}";
 
     /**
      * 默认的文件日志格式
      */
-    private static final String DEFAULT_LOGGING_PATTERN_FILE = "%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %-36X{trace} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}";
+    private static final String DEFAULT_LOGGING_PATTERN_FILE = "%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %-36X{trace} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}";
 
     @Override
     public void postProcessEnvironment(final ConfigurableEnvironment environment, final SpringApplication application) {
