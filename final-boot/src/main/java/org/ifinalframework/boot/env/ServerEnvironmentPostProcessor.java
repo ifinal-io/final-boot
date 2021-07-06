@@ -34,13 +34,11 @@ import java.util.Collections;
 @SpringFactory(EnvironmentPostProcessor.class)
 public class ServerEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
-    public static final String SERVER_PORT_PROPERTY_NAME = "server.port";
-
     @Override
     public void postProcessEnvironment(final ConfigurableEnvironment environment, final SpringApplication application) {
         environment.getPropertySources()
             .addLast(new MapPropertySource("defaultServerProperties",
-                Collections.singletonMap(SERVER_PORT_PROPERTY_NAME, 8080)));
+                Collections.singletonMap("server.port", 8080)));
     }
 
 }

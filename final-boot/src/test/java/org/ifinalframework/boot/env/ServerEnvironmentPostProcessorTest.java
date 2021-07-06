@@ -15,8 +15,7 @@
 
 package org.ifinalframework.boot.env;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.springframework.core.env.StandardEnvironment;
 
@@ -26,28 +25,24 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.*;
 
 /**
- * LoggerEnvironmentPostProcessorTest.
+ * ServerEnvironmentPostProcessorTest.
  *
  * @author likly
- * @version 1.2.1
- * @since 1.2.1
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @ExtendWith(MockitoExtension.class)
-class LoggerEnvironmentPostProcessorTest {
+class ServerEnvironmentPostProcessorTest {
 
     @InjectMocks
-    private LoggerEnvironmentPostProcessor postProcessor;
+    private ServerEnvironmentPostProcessor serverEnvironmentPostProcessor;
 
     @Test
     void postProcessEnvironment() {
-
         final StandardEnvironment environment = new StandardEnvironment();
-        assertFalse(environment.containsProperty("logging.pattern.console"));
-        assertFalse(environment.containsProperty("logging.pattern.file"));
-        postProcessor.postProcessEnvironment(environment, null);
-        assertTrue(environment.containsProperty("logging.pattern.console"));
-        assertTrue(environment.containsProperty("logging.pattern.file"));
-
+        serverEnvironmentPostProcessor.postProcessEnvironment(environment, null);
+        assertEquals("8080", environment.getProperty("server.port"));
+        assertEquals(8080, environment.getProperty("server.port", int.class));
     }
 
 }
