@@ -19,12 +19,12 @@
     <parent>
         <groupId>org.ifinalframework.project</groupId>
         <artifactId>final-project</artifactId>
-        <version>1.2.2-SNAPSHOT</version>
+        <version>1.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.ifinalframework.boot</groupId>
     <artifactId>final-boot-parent</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <name>final-boot-parent</name>
     <description>Final Boot</description>
     <packaging>pom</packaging>
@@ -49,9 +49,9 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <final.annotation.version>1.2.2-SNAPSHOT</final.annotation.version>
-        <final.framework.version>1.2.2-SNAPSHOT</final.framework.version>
-        <final.data.version>1.2.2-SNAPSHOT</final.data.version>
+        <final.annotation.version>1.2.2</final.annotation.version>
+        <final.framework.version>1.2.2</final.framework.version>
+        <final.data.version>1.2.2</final.data.version>
     </properties>
 
     <dependencies>
@@ -69,7 +69,7 @@
             <dependency>
                 <groupId>org.ifinalframework.auto</groupId>
                 <artifactId>final-auto</artifactId>
-                <version>1.2.1</version>
+                <version>1.2.2</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -101,67 +101,67 @@
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-autoconfigure</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-cache</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-redis</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-entity</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-json</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-logging</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-monitor</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-mybatis</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-service</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-sharding</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-web</artifactId>
-                <version>1.2.2-SNAPSHOT</version>
+                <version>1.2.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
