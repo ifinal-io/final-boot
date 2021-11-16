@@ -13,36 +13,31 @@
  * limitations under the License.
  */
 
-package org.ifinalframework.boot.env;
+package org.ifinalframework.boot.autoconfigure.app.env;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.logging.DeferredLogs;
+import org.springframework.core.env.StandardEnvironment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.springframework.core.env.StandardEnvironment;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.*;
-
 /**
- * ServerEnvironmentPostProcessorTest.
+ * FinalSpringApplicationPropertiesEnvironmentPostProcessorTest.
  *
  * @author likly
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.2.3
+ * @since 1.2.3
  */
-@ExtendWith(MockitoExtension.class)
-class ServerEnvironmentPostProcessorTest {
+class FinalSpringApplicationPropertiesEnvironmentPostProcessorTest {
+    private FinalSpringApplicationPropertiesEnvironmentPostProcessor environmentPostProcessor
+            = new FinalSpringApplicationPropertiesEnvironmentPostProcessor(new DeferredLogs().getLog(FinalSpringApplicationPropertiesEnvironmentPostProcessor.class));
 
-    @InjectMocks
-    private ServerEnvironmentPostProcessor serverEnvironmentPostProcessor;
 
     @Test
     void postProcessEnvironment() {
         final StandardEnvironment environment = new StandardEnvironment();
-        serverEnvironmentPostProcessor.postProcessEnvironment(environment, null);
-        assertEquals("8080", environment.getProperty("server.port"));
+        environmentPostProcessor.postProcessEnvironment(environment, new SpringApplication());
         assertEquals(8080, environment.getProperty("server.port", int.class));
     }
-
 }
