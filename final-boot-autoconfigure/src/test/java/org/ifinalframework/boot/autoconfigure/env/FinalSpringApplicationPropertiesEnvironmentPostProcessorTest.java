@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ifinalframework.boot.autoconfigure.app.env;
+package org.ifinalframework.boot.autoconfigure.env;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ifinalframework.boot.autoconfigure.app.env;
+package org.ifinalframework.boot.autoconfigure.env;
 
 import org.apache.commons.logging.Log;
 import org.ifinalframework.auto.spring.factory.annotation.SpringFactory;
