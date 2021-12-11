@@ -15,6 +15,7 @@
 
 package org.ifinalframework.boot.autoconfigure.env;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.ifinalframework.auto.spring.factory.annotation.SpringFactory;
 import org.springframework.boot.SpringApplication;
@@ -32,14 +33,12 @@ import java.io.IOException;
  * @since 1.2.3
  */
 @SpringFactory(EnvironmentPostProcessor.class)
+@RequiredArgsConstructor
 public class FinalSpringApplicationPropertiesEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
     public static final String FINAL_SPRING_APPLICATION_PROPERTIES = "META-INF/final-spring-application.properties";
     private final Log logger;
 
-    public FinalSpringApplicationPropertiesEnvironmentPostProcessor(Log logger) {
-        this.logger = logger;
-    }
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
