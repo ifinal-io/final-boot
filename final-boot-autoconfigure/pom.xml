@@ -45,6 +45,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.ifinalframework</groupId>
+            <artifactId>final-web</artifactId>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.ifinalframework.annotation</groupId>
             <artifactId>final-annotation-query</artifactId>
             <optional>true</optional>
