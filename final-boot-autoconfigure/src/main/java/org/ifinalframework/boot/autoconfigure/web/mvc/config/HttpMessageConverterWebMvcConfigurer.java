@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnWebApplication
 public class HttpMessageConverterWebMvcConfigurer implements WebMvcConfigurer {
 
     /**
