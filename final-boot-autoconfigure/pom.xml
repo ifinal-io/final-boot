@@ -18,7 +18,7 @@
     <parent>
         <artifactId>final-boot-parent</artifactId>
         <groupId>org.ifinalframework.boot</groupId>
-        <version>1.2.3-SNAPSHOT</version>
+        <version>1.2.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -53,6 +53,11 @@
         <dependency>
             <groupId>org.ifinalframework.annotation</groupId>
             <artifactId>final-annotation-query</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.ifinalframework.auto</groupId>
+            <artifactId>auto-spring</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
