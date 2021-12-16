@@ -32,6 +32,7 @@ import java.io.IOException;
  * @version 1.2.3
  * @since 1.2.3
  */
+
 @SpringFactory(EnvironmentPostProcessor.class)
 @RequiredArgsConstructor
 public class FinalSpringApplicationPropertiesEnvironmentPostProcessor implements EnvironmentPostProcessor {
@@ -42,6 +43,7 @@ public class FinalSpringApplicationPropertiesEnvironmentPostProcessor implements
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+
 
         try {
             final ResourcePropertySource propertySource = new ResourcePropertySource("finalSpringApplication", FINAL_SPRING_APPLICATION_PROPERTIES, application.getClassLoader());
