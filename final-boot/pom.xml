@@ -43,6 +43,12 @@
             <artifactId>auto-spring</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>
