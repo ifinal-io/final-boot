@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ifinalframework.boot.context.logging;
+package org.ifinalframework.boot.logging;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;

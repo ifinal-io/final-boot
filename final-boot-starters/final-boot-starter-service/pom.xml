@@ -23,7 +23,7 @@
             <groupId>org.ifinalframework.boot</groupId>
         </dependency>
         <dependency>
-            <artifactId>final-data-service</artifactId>
+            <artifactId>final-data-core</artifactId>
             <groupId>org.ifinalframework.data</groupId>
         </dependency>
     </dependencies>
