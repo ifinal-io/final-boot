@@ -6,7 +6,7 @@
     },
     {
       "name": "spring.application.import-resource",
-      "type": "org.ifinalframework.boot.context.factory.ImportResourceBeanDefinitionRegistryPostProcessor"
+      "type": "org.ifinalframework.context.beans.factory.ImportResourceBeanDefinitionRegistryPostProcessor"
     }
   ],
   "properties": [
@@ -33,13 +33,13 @@
     {
       "name": "spring.application.import-resource.locations",
       "type": "java.lang.String[]",
-      "sourceType": "org.ifinalframework.boot.context.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
+      "sourceType": "org.ifinalframework.context.beans.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
       "defaultValue": "classpath:spring-config-*.xml,classpath*:config/spring-config-*.xml,classpath*:spring/spring-config-*.xml"
     },
     {
       "name": "spring.application.import-resource.use-default",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ifinalframework.boot.context.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
+      "sourceType": "org.ifinalframework.context.beans.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
       "defaultValue": true
     }
   ]
