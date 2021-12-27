@@ -19,6 +19,10 @@
     <artifactId>final-boot-starter-web</artifactId>
     <dependencies>
         <dependency>
+            <groupId>org.ifinalframework.boot</groupId>
+            <artifactId>final-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
             <artifactId>final-boot-starter</artifactId>
             <groupId>org.ifinalframework.boot</groupId>
         </dependency>
