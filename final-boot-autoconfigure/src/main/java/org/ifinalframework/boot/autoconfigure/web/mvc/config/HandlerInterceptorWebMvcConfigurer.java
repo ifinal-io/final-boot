@@ -51,7 +51,7 @@ import java.util.function.Predicate;
 @Slf4j
 @Component
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@ConditionalOnClass({Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class})
+@ConditionalOnClass({Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class, HandlerInterceptorCustomizer.class})
 public class HandlerInterceptorWebMvcConfigurer implements WebMvcConfigurer {
 
     private final List<HandlerInterceptor> handlerInterceptors;
