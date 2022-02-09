@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 the original author or authors.
+ * Copyright 2020-2022 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.web.i18n;
 
 import org.ifinalframework.context.util.Messages;
-import org.ifinalframework.web.i18n.I18NLocaleResolver;
+import org.ifinalframework.web.servlet.i18n.I18NLocaleResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
