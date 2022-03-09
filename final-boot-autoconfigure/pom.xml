@@ -45,6 +45,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.ifinalframework.boot</groupId>
+            <artifactId>final-boot</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.ifinalframework.data</groupId>
             <artifactId>final-data-redis</artifactId>
             <optional>true</optional>
@@ -64,6 +68,18 @@
         <dependency>
             <groupId>org.ifinalframework.auto</groupId>
             <artifactId>auto-spring</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
     </dependencies>
