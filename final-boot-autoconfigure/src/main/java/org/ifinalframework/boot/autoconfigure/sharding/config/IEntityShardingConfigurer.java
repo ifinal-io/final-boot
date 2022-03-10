@@ -40,6 +40,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 /**
  * @author likly
  * @version 1.0.0
@@ -149,10 +150,10 @@ public class IEntityShardingConfigurer implements ShardingConfigurer, BeanFactor
         ShardingStrategyRegistration shardingStrategyRegistration
                 = buildShardingStrategyConfiguration(shardingStrategy, name, annotationAttributes, properties);
         switch (scope) {
-            case Scope.TABLE:
+            case TABLE:
                 table.setTableShardingStrategy(shardingStrategyRegistration);
                 break;
-            case Scope.DATABASE:
+            case DATABASE:
                 table.setDatabaseShardingStrategy(shardingStrategyRegistration);
                 break;
             default:

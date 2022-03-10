@@ -15,7 +15,7 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import org.ifinalframework.sharding.config.ShardingDataSourceSupport;
+import org.ifinalframework.boot.autoconfigure.sharding.config.ShardingDataSourceSupport;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 

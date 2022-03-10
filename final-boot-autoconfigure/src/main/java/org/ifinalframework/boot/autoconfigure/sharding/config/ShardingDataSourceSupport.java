@@ -102,7 +102,7 @@ public class ShardingDataSourceSupport {
 
     }
 
-    protected ShardingConfiguration getShardingDataSourceConfiguration() {
+    protected ShardingConfiguration getShardingDataSourceConfiguration() throws SQLException {
 
         ShardingConfiguration configuration = ShardingConfiguration.builder()
                 .datasource(Collections.unmodifiableMap(getDataSourceRegistry().getDataSources()))
@@ -181,7 +181,7 @@ public class ShardingDataSourceSupport {
         }
     }
 
-    private ShardingDataSourceRegistry getDataSourceRegistry() {
+    private ShardingDataSourceRegistry getDataSourceRegistry() throws SQLException {
         ShardingDataSourceRegistry registry = new ShardingDataSourceRegistry();
         composite.addDataSource(registry);
         return registry;

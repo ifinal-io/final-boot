@@ -81,7 +81,7 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
             return properties.initializeDataSourceBuilder().build();
         }
 
-        return dataSourceFactory.create(environment, prefix);
+        return dataSourceFactory.create(properties, environment, prefix);
 
     }
 

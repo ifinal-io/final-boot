@@ -18,6 +18,7 @@ package org.ifinalframework.boot.autoconfigure.sharding.config;
 import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -38,9 +39,11 @@ public final class ShardingConfigurerComposite implements ShardingConfigurer {
     }
 
     @Override
-    public void addDataSource(final @NonNull ShardingDataSourceRegistry registry) {
+    public void addDataSource(final @NonNull ShardingDataSourceRegistry registry) throws SQLException {
 
-        configurers.forEach(each -> each.addDataSource(registry));
+        for (ShardingConfigurer each : configurers) {
+            each.addDataSource(registry);
+        }
     }
 
     @Override
