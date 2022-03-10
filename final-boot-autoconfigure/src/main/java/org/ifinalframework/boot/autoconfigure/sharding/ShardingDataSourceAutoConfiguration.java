@@ -15,7 +15,9 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import org.ifinalframework.boot.autoconfigure.sharding.config.ShardingDataSourceSupport;
+import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
+import org.ifinalframework.sharding.config.ShardingDataSourceSupport;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0.0
  */
 @Configuration
+@ConditionalOnClass(ShardingSphereDataSourceFactory.class)
 @ConditionalOnProperty(prefix = ShardingDataSourceProperties.DEFAULT_DATASOURCE_PREFIX, name = "enable", havingValue = "true")
 public class ShardingDataSourceAutoConfiguration extends ShardingDataSourceSupport {
 

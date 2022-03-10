@@ -16,10 +16,10 @@
 package org.ifinalframework.boot.autoconfigure.sharding;
 
 import lombok.Setter;
-import org.ifinalframework.boot.autoconfigure.sharding.config.ShardingConfigurer;
-import org.ifinalframework.boot.autoconfigure.sharding.config.ShardingDataSourceRegistry;
 import org.ifinalframework.boot.datasource.DataSourceFactory;
 import org.ifinalframework.boot.datasource.DataSourceFactoryManager;
+import org.ifinalframework.sharding.config.ShardingConfigurer;
+import org.ifinalframework.sharding.config.ShardingDataSourceRegistry;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.EnvironmentAware;
