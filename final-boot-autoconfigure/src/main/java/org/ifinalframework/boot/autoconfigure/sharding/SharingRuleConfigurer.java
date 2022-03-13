@@ -15,8 +15,8 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import org.ifinalframework.sharding.config.ShardingConfigurer;
-import org.ifinalframework.sharding.config.ShardingTableRegistry;
+import org.ifinalframework.data.sharding.config.ShardingConfigurer;
+import org.ifinalframework.data.sharding.config.ShardingTableRegistry;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
