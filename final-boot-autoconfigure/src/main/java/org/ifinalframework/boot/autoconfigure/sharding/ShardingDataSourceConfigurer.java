@@ -16,8 +16,8 @@
 package org.ifinalframework.boot.autoconfigure.sharding;
 
 import lombok.Setter;
-import org.ifinalframework.boot.datasource.DataSourceFactory;
-import org.ifinalframework.boot.datasource.DataSourceFactoryManager;
+import org.ifinalframework.data.jdbc.DataSourceFactory;
+import org.ifinalframework.data.jdbc.DataSourceFactoryManager;
 import org.ifinalframework.sharding.config.ShardingConfigurer;
 import org.ifinalframework.sharding.config.ShardingDataSourceRegistry;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -31,7 +31,6 @@ import org.springframework.util.CollectionUtils;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author likly
@@ -52,7 +51,6 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
 
     @Setter
     private Environment environment;
-
 
     public ShardingDataSourceConfigurer(final ShardingDataSourceProperties properties,
                                         final DataSourceProperties dataSourceProperties) {
@@ -76,11 +74,6 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
 
     private DataSource create(DataSourceProperties properties, String prefix) throws SQLException {
         final DataSourceFactory<? extends DataSource> dataSourceFactory = dataSourceFactoryManager.getDataSourceFactory(properties.getType());
-
-        if (Objects.isNull(dataSourceFactory)) {
-            return properties.initializeDataSourceBuilder().build();
-        }
-
         return dataSourceFactory.create(properties, environment, prefix);
 
     }
