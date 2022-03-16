@@ -16,6 +16,7 @@
 package org.ifinalframework.boot.env;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
@@ -31,11 +32,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * PropertySourceLoaders.
+ * Load {@link PropertySource}s from {@code locations} with {@link PropertySourceLoader}
  *
  * @author ilikly
  * @version 1.3.0
- * @see org.springframework.boot.env.PropertySourceLoader
+ * @see PropertySourceLoader
+ * @see ResourceLoader
  * @since 1.3.0
  */
 @Slf4j
@@ -49,10 +51,26 @@ public class PropertySourceLoaders {
         this.propertySourceLoaders = SpringFactoriesLoader.loadFactories(PropertySourceLoader.class, getClass().getClassLoader());
     }
 
+    /**
+     * load property sources from locations.
+     *
+     * @param locations property source locations.
+     * @return property sources
+     * @throws IOException io exception
+     * @see #load(Collection)
+     */
     public List<PropertySource<?>> load(String... locations) throws IOException {
         return load(Arrays.asList(locations));
     }
 
+    /**
+     * load property sources from locations.
+     *
+     * @param locations property source locations.
+     * @return property sources
+     * @throws IOException io exception
+     * @see #load(String)
+     */
     public List<PropertySource<?>> load(Collection<String> locations) throws IOException {
         List<PropertySource<?>> propertySources = new LinkedList<>();
         for (String location : locations) {
