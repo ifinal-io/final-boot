@@ -36,9 +36,7 @@ public class RedisAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate(final RedisConnectionFactory redisConnectionFactory) {
-
-        ObjectStringJsonRedisTemplate template = new ObjectStringJsonRedisTemplate();
-        template.setConnectionFactory(redisConnectionFactory);
+        ObjectStringJsonRedisTemplate template = new ObjectStringJsonRedisTemplate(redisConnectionFactory);
         RedisRegistry.getInstance().setRedisTemplate(template);
         return template;
     }
