@@ -25,7 +25,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

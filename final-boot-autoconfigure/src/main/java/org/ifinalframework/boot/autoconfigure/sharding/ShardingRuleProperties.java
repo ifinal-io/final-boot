@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @see org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration
  * @since 1.0.0

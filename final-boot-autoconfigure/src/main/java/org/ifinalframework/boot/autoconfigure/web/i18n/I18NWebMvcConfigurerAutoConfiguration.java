@@ -29,7 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

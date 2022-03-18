@@ -24,7 +24,7 @@ import java.util.Properties;
 /**
  * 分片策略
  *
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

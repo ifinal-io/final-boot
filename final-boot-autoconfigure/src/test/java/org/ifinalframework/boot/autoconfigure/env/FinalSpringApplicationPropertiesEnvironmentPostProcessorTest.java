@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * FinalSpringApplicationPropertiesEnvironmentPostProcessorTest.
  *
- * @author likly
+ * @author ilikly
  * @version 1.2.3
  * @since 1.2.3
  */

@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import java.io.Serializable;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

@@ -52,7 +52,7 @@ import java.util.Map.Entry;
 /**
  * LoggingExtApplicationListener.
  *
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @see LoggingApplicationListener
  * @see org.springframework.boot.logging.LoggingSystem

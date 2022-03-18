@@ -19,7 +19,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

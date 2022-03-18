@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * Load {@code META-INF/final-spring-application.properties} into {@link ConfigurableEnvironment}.
  *
- * @author likly
+ * @author ilikly
  * @version 1.2.3
  * @since 1.2.3
  */

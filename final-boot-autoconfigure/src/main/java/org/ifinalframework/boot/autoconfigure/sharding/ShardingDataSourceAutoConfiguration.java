@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */

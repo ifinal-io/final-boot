@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * 行内分片策略
  *
- * @author likly
+ * @author ilikly
  * @version 1.0.0
  * @see org.apache.shardingsphere.sharding.api.config.strategy.sharding.StandardShardingStrategyConfiguration
  * @since 1.0.0
