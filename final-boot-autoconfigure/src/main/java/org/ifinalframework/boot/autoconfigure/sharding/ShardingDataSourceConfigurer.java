@@ -20,6 +20,8 @@ import org.ifinalframework.data.jdbc.DataSourceFactory;
 import org.ifinalframework.data.jdbc.DataSourceFactoryManager;
 import org.ifinalframework.data.sharding.config.ShardingConfigurer;
 import org.ifinalframework.data.sharding.config.ShardingDataSourceRegistry;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.EnvironmentAware;
@@ -32,12 +34,15 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
+
 /**
  * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(ShardingSphereDataSourceFactory.class)
 @EnableConfigurationProperties({ShardingDataSourceProperties.class, DataSourceProperties.class})
 public class ShardingDataSourceConfigurer implements ShardingConfigurer, EnvironmentAware {
 

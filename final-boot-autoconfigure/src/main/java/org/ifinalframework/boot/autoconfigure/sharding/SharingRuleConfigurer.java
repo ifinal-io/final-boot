@@ -17,6 +17,8 @@ package org.ifinalframework.boot.autoconfigure.sharding;
 
 import org.ifinalframework.data.sharding.config.ShardingConfigurer;
 import org.ifinalframework.data.sharding.config.ShardingTableRegistry;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -33,6 +35,7 @@ import java.util.Objects;
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(ShardingConfigurer.class)
 @EnableConfigurationProperties(ShardingRuleProperties.class)
 public class SharingRuleConfigurer implements ShardingConfigurer {
 
