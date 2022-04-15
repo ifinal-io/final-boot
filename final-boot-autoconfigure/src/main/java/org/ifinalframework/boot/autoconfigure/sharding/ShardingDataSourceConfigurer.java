@@ -70,7 +70,7 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
             registry.addDataSource(DEFAULT_DATASOURCE_NAME, create(dataSourceProperties, "spring.datasource"));
         } else {
             for (Map.Entry<String, DataSourceProperties> entry : properties.getDatasource().entrySet()) {
-                final DataSource dataSource = create(entry.getValue(), ShardingDataSourceProperties.DEFAULT_DATASOURCE_PREFIX + "." + entry.getKey());
+                final DataSource dataSource = create(entry.getValue(), ShardingDataSourceProperties.DEFAULT_DATASOURCE_PREFIX + ".datasource." + entry.getKey());
                 registry.addDataSource(entry.getKey(), dataSource);
             }
         }
