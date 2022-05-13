@@ -15,8 +15,6 @@
 
 package org.ifinalframework.boot.autoconfigure.redis;
 
-import org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate;
-import org.ifinalframework.data.redis.RedisRegistry;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -24,16 +22,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 
+import org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate;
+import org.ifinalframework.data.redis.RedisRegistry;
+
 /**
  * @author ilikly
  * @version 1.0.0
  * @since 1.0.0
+ * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(RedisOperations.class)
 public class RedisAutoConfiguration {
 
     @Bean
+    @ConditionalOnClass(name = "org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate")
     @ConditionalOnMissingBean
     public ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate(final RedisConnectionFactory redisConnectionFactory) {
         ObjectStringJsonRedisTemplate template = new ObjectStringJsonRedisTemplate(redisConnectionFactory);
