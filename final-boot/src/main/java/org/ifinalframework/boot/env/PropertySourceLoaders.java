@@ -35,10 +35,10 @@ import java.util.List;
  * Load {@link PropertySource}s from {@code locations} with {@link PropertySourceLoader}
  *
  * @author ilikly
- * @version 1.3.0
+ * @version 1.3.1
  * @see PropertySourceLoader
  * @see ResourceLoader
- * @since 1.3.0
+ * @since 1.3.1
  */
 @Slf4j
 public class PropertySourceLoaders {
