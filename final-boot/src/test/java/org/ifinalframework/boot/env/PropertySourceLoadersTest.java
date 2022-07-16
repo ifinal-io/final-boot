@@ -1,10 +1,15 @@
 package org.ifinalframework.boot.env;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import org.springframework.boot.env.PropertiesPropertySourceLoader;
+import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
+import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -19,7 +24,18 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.3.1
  * @since 1.3.1
  */
+@Slf4j
 class PropertySourceLoadersTest {
+
+    @Test
+    void loaders(){
+        List<PropertySourceLoader> propertySourceLoaders = SpringFactoriesLoader.loadFactories(PropertySourceLoader.class, getClass().getClassLoader());
+        for (PropertySourceLoader propertySourceLoader : propertySourceLoaders) {
+            logger.info(propertySourceLoader.getClass().getName());
+        }
+        assertEquals(PropertiesPropertySourceLoader.class,propertySourceLoaders.get(0).getClass());
+    }
+
 
     @Test
     @SneakyThrows

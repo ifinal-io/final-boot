@@ -10,3 +10,5 @@ spring:
       max-active: 4
       initial-size: 4
       min-idle: 1
+  application:
+    name: application-haha.yml
