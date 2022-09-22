@@ -44,6 +44,7 @@
         <module>final-boot-starters/final-boot-starter-monitor</module>
         <module>final-boot-starters/final-boot-starter-web</module>
         <module>final-boot-starters/final-boot-starter-security</module>
+        <module>final-boot-starters/final-boot-starter-doc</module>
     </modules>
 
     <properties>
@@ -165,6 +166,11 @@
             <dependency>
                 <groupId>org.ifinalframework.boot</groupId>
                 <artifactId>final-boot-starter-security</artifactId>
+                <version>1.4.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ifinalframework.boot</groupId>
+                <artifactId>final-boot-starter-doc</artifactId>
                 <version>1.4.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
