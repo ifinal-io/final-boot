@@ -15,14 +15,15 @@
 
 package org.ifinalframework.boot.autoconfigure.web.cors;
 
+import java.util.Objects;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.Objects;
 
 /**
  * @author ilikly
@@ -32,12 +33,12 @@ import java.util.Objects;
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer.class)
 @EnableConfigurationProperties(CorsProperties.class)
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class CorsWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
 
     private final CorsProperties corsProperties;
 
     public CorsWebMvcConfigurerAutoConfiguration(final CorsProperties corsProperties) {
-
         this.corsProperties = corsProperties;
     }
 
