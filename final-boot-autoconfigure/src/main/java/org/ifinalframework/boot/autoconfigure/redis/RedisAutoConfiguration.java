@@ -20,7 +20,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisOperations;
 
 import org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate;
 import org.ifinalframework.data.redis.RedisRegistry;
@@ -28,17 +27,22 @@ import org.ifinalframework.data.redis.RedisRegistry;
 /**
  * @author ilikly
  * @version 1.0.0
- * @since 1.0.0
  * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(RedisOperations.class)
+@ConditionalOnClass(ObjectStringJsonRedisTemplate.class)
 public class RedisAutoConfiguration {
 
+    /**
+     * instance {@link  ObjectStringJsonRedisTemplate}.
+     *
+     * @param redisConnectionFactory redis connection factory
+     * @return instance
+     */
     @Bean
-    @ConditionalOnClass(name = "org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate")
     @ConditionalOnMissingBean
-    public ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate(final RedisConnectionFactory redisConnectionFactory) {
+    public ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         ObjectStringJsonRedisTemplate template = new ObjectStringJsonRedisTemplate(redisConnectionFactory);
         RedisRegistry.getInstance().setRedisTemplate(template);
         return template;
