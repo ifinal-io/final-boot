@@ -41,6 +41,11 @@
       "type": "java.lang.Boolean",
       "sourceType": "org.ifinalframework.context.beans.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
       "defaultValue": true
+    },
+    {
+      "name": "final.data.spi.user-class",
+      "type": "java.lang.String",
+      "defaultValue": "org.ifinalframework.core.IUser"
     }
   ]
 }
