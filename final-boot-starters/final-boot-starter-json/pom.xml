@@ -23,7 +23,7 @@
     <parent>
         <artifactId>final-boot-parent</artifactId>
         <groupId>org.ifinalframework.boot</groupId>
-        <version>1.4.2</version>
+        <version>1.4.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
