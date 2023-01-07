@@ -24,6 +24,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import org.ifinalframework.data.core.TenantSupplier;
 import org.ifinalframework.data.core.TenantTableService;
@@ -59,17 +61,17 @@ public class TenantAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(TenantLineHandler.class)
-    public TenantLineInnerInterceptor tenantLineInnerInterceptor(TenantLineHandler tenantLineHandler){
+    public TenantLineInnerInterceptor tenantLineInnerInterceptor(TenantLineHandler tenantLineHandler) {
         return new TenantLineInnerInterceptor(tenantLineHandler);
     }
 
     @Bean
+    @Order(Ordered.LOWEST_PRECEDENCE - 1000)
     public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired List<InnerInterceptor> interceptors) {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
         mybatisPlusInterceptor.setInterceptors(interceptors);
         return mybatisPlusInterceptor;
     }
-
 
 
 }
