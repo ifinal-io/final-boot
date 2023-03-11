@@ -16,6 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import org.ifinalframework.core.IUser;
 
@@ -31,7 +32,27 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "final.security")
+@ConfigurationProperties(prefix = "spring.security")
 public class SecurityProperties {
     Class<? extends IUser<?>> userClass;
+
+    private LogoutProperties logout;
+
+    private AnonymousProperties anonymous;
+
+    @Setter
+    @Getter
+    public static class LogoutProperties {
+        private Boolean enable = true;
+
+        private String url = "/api/logout";
+
+        private Class<? extends LogoutSuccessHandler> successHandler;
+    }
+
+    @Setter
+    @Getter
+    public static class AnonymousProperties {
+        private Boolean enable;
+    }
 }

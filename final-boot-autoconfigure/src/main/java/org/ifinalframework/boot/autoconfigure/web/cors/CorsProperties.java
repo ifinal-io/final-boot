@@ -30,9 +30,11 @@ import java.io.Serializable;
 @ConfigurationProperties(prefix = CorsProperties.PREFIX)
 public class CorsProperties implements Serializable {
 
-    public static final String PREFIX = "final.web.cors";
+    public static final String PREFIX = "spring.web.cors";
 
     private static final long serialVersionUID = 8336511916409326596L;
+
+    private Boolean enable;
 
     /**
      * @see CorsRegistration#pathPattern
@@ -58,6 +60,8 @@ public class CorsProperties implements Serializable {
      * @see CorsRegistration#allowedOrigins(String...)
      */
     private String[] allowedOrigins;
+
+    private Long maxAge;
 
 }
 
