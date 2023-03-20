@@ -52,9 +52,18 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * SecurityAutoConfiguration.
  *
+ * <h2>Http Basic</h2>
+ *
+ *
+ * <pre class="code">
+ *      http.httpBasic();
+ * </pre>
+ *
  * @author ilikly
  * @version 1.5.0
  * @see org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+ * @see org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+ * @see org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter
  * @since 1.5.0
  */
 @Slf4j
@@ -65,9 +74,10 @@ import lombok.extern.slf4j.Slf4j;
 public class FinalSecurityAutoConfiguration {
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
+
     @Bean
     public SecurityFilterChain corsSecurityFilterChain(ApplicationContext applicationContext, HttpSecurity http, CorsProperties corsProperties, SecurityProperties securityProperties) throws Exception {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -90,16 +100,13 @@ public class FinalSecurityAutoConfiguration {
         source.registerCorsConfiguration(corsProperties.getMapping(), corsConfiguration);
         http.cors().configurationSource(source);
 
-        http.anonymous();
+        basic(http, securityProperties.getBasic());
+        rememberMe(http, securityProperties.getRememberMe());
+        anonymous(http, securityProperties.getAnonymous());
 
+        http.csrf().disable();
 
-        http.httpBasic()
-                .and()
-                .csrf()
-                .disable();
-
-        http.logout().logoutUrl(securityProperties.getLogout().getUrl());
-        http.logout().logoutSuccessHandler(new LogoutSuccessHandler() {
+        http.logout().logoutUrl(securityProperties.getLogout().getUrl()).logoutSuccessHandler(new LogoutSuccessHandler() {
             @Override
             public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 Cookie cookie = new Cookie("token", null);
@@ -109,29 +116,45 @@ public class FinalSecurityAutoConfiguration {
             }
         });
 
-        applicationContext.getBeanProvider(BearerAuthenticationFilter.class)
-                .ifAvailable(filter -> {
-                    logger.info("addFilterBefore UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
-                    http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-                });
 
-        applicationContext.getBeanProvider(UsernamePasswordAuthenticationFilter.class)
-                .ifAvailable(filter -> {
-                    logger.info("addFilterAt UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
-                    http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
-                });
+        applicationContext.getBeanProvider(BearerAuthenticationFilter.class).ifAvailable(filter -> {
+            logger.info("addFilterBefore UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
+            http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        });
 
-        FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/api/login").permitAll();
+        applicationContext.getBeanProvider(UsernamePasswordAuthenticationFilter.class).ifAvailable(filter -> {
+            logger.info("addFilterAt UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
+            http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
+        });
+
+        FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().anyRequest().permitAll().and().formLogin().loginPage("/api/login").permitAll();
 
         applicationContext.getBeanProvider(ResultAuthenticationSuccessHandler.class).ifAvailable(formLoginConfigurer::successHandler);
         applicationContext.getBeanProvider(ResultAuthenticationFailureHandler.class).ifAvailable(formLoginConfigurer::failureHandler);
 
         return http.build();
+    }
+
+    private void basic(HttpSecurity http, SecurityProperties.BasicProperties basicProperties) throws Exception {
+        if (Objects.isNull(basicProperties) || !Boolean.TRUE.equals(basicProperties.getEnable())) {
+            return;
+        }
+        http.httpBasic();
+    }
+
+    private void rememberMe(HttpSecurity http, SecurityProperties.RememberMeProperties rememberMeProperties) throws Exception {
+        if (Objects.isNull(rememberMeProperties) || !Boolean.TRUE.equals(rememberMeProperties.getEnable())) {
+            return;
+        }
+        http.rememberMe().alwaysRemember(Boolean.TRUE.equals(rememberMeProperties.getAlwaysRemember()));
+
+    }
+
+    private void anonymous(HttpSecurity http, SecurityProperties.AnonymousProperties anonymousProperties) throws Exception {
+        if (Objects.isNull(anonymousProperties) || !Boolean.TRUE.equals(anonymousProperties.getEnable())) {
+            return;
+        }
+        http.anonymous();
     }
 
 }

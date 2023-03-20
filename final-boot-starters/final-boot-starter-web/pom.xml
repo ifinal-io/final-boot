@@ -27,7 +27,7 @@
             <groupId>org.ifinalframework.boot</groupId>
         </dependency>
         <dependency>
-            <artifactId>final-web</artifactId>
+            <artifactId>final-webmvc</artifactId>
             <groupId>org.ifinalframework</groupId>
         </dependency>
     </dependencies>

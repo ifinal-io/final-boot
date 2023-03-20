@@ -36,9 +36,28 @@ import lombok.Setter;
 public class SecurityProperties {
     Class<? extends IUser<?>> userClass;
 
-    private LogoutProperties logout;
+    private LogoutProperties logout = new LogoutProperties();
 
-    private AnonymousProperties anonymous;
+    private BasicProperties basic = new BasicProperties();
+
+    private RememberMeProperties rememberMe = new RememberMeProperties();
+
+    private AnonymousProperties anonymous = new AnonymousProperties();
+
+    @Setter
+    @Getter
+    public static class BasicProperties {
+        private Boolean enable = false;
+    }
+
+    @Setter
+    @Getter
+    public static class RememberMeProperties {
+        private Boolean enable = true;
+        private Boolean alwaysRemember = false;
+
+    }
+
 
     @Setter
     @Getter
