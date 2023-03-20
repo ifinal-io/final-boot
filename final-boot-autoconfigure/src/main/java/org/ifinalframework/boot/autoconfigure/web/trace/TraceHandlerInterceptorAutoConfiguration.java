@@ -15,12 +15,13 @@
 
 package org.ifinalframework.boot.autoconfigure.web.trace;
 
-import org.ifinalframework.auto.spring.factory.annotation.SpringAutoConfiguration;
-import org.ifinalframework.web.servlet.interceptor.TraceHandlerInterceptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import org.ifinalframework.auto.spring.factory.annotation.SpringAutoConfiguration;
+import org.ifinalframework.web.servlet.interceptor.TraceHandlerInterceptor;
 
 /**
  * @author ilikly
