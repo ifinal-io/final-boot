@@ -33,6 +33,7 @@ import org.springframework.security.authentication.DefaultAuthenticationEventPub
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -100,6 +101,9 @@ public class FinalSecurityAutoConfiguration {
         source.registerCorsConfiguration(corsProperties.getMapping(), corsConfiguration);
         http.cors().configurationSource(source);
 
+
+        session(http, securityProperties.getSession());
+
         basic(http, securityProperties.getBasic());
         rememberMe(http, securityProperties.getRememberMe());
         anonymous(http, securityProperties.getAnonymous());
@@ -132,7 +136,16 @@ public class FinalSecurityAutoConfiguration {
         applicationContext.getBeanProvider(ResultAuthenticationSuccessHandler.class).ifAvailable(formLoginConfigurer::successHandler);
         applicationContext.getBeanProvider(ResultAuthenticationFailureHandler.class).ifAvailable(formLoginConfigurer::failureHandler);
 
+
         return http.build();
+    }
+
+    private void session(HttpSecurity http, SecurityProperties.SessionProperties sessionProperties) throws Exception {
+        final SessionManagementConfigurer<HttpSecurity> sessionManagement = http.sessionManagement();
+        if (Objects.nonNull(sessionProperties.getCreationPolicy())) {
+            sessionManagement.sessionCreationPolicy(sessionProperties.getCreationPolicy());
+        }
+
     }
 
     private void basic(HttpSecurity http, SecurityProperties.BasicProperties basicProperties) throws Exception {
@@ -156,5 +169,6 @@ public class FinalSecurityAutoConfiguration {
         }
         http.anonymous();
     }
+
 
 }

@@ -16,6 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import org.ifinalframework.core.IUser;
@@ -36,6 +37,8 @@ import lombok.Setter;
 public class SecurityProperties {
     Class<? extends IUser<?>> userClass;
 
+    private SessionProperties session = new SessionProperties();
+
     private LogoutProperties logout = new LogoutProperties();
 
     private BasicProperties basic = new BasicProperties();
@@ -43,6 +46,13 @@ public class SecurityProperties {
     private RememberMeProperties rememberMe = new RememberMeProperties();
 
     private AnonymousProperties anonymous = new AnonymousProperties();
+
+    @Setter
+    @Getter
+    public static class SessionProperties{
+        private Boolean enable = true;
+        private SessionCreationPolicy creationPolicy;
+    }
 
     @Setter
     @Getter
