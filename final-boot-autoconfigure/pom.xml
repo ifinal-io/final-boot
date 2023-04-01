@@ -130,6 +130,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.ifinalframework</groupId>
+            <artifactId>final-validation</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.ifinalframework.data</groupId>
             <artifactId>final-data-mybatis</artifactId>
             <scope>provided</scope>

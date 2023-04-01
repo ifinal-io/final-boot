@@ -30,6 +30,10 @@
             <artifactId>final-webmvc</artifactId>
             <groupId>org.ifinalframework</groupId>
         </dependency>
+        <dependency>
+            <groupId>org.ifinalframework</groupId>
+            <artifactId>final-validation</artifactId>
+        </dependency>
     </dependencies>
 
     <modelVersion>4.0.0</modelVersion>
