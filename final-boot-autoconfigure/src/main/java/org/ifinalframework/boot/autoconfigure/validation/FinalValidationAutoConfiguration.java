@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
-import org.ifinalframework.validation.ValidationGroupsProvider;
+import org.ifinalframework.validation.MethodValidationGroupsProvider;
 import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidationPostProcessor;
 
 /**
@@ -46,7 +46,7 @@ import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidati
  * @since 1.5.0
  */
 @AutoConfiguration
-@ConditionalOnBean(ValidationGroupsProvider.class)
+@ConditionalOnBean(MethodValidationGroupsProvider.class)
 @ConditionalOnClass(ExecutableValidator.class)
 @ConditionalOnResource(resources = "classpath:META-INF/services/javax.validation.spi.ValidationProvider")
 @AutoConfigureBefore(ValidationAutoConfiguration.class)
@@ -57,9 +57,9 @@ public class FinalValidationAutoConfiguration {
     public static MethodValidationPostProcessor methodValidationPostProcessor(Environment environment,
                                                                               @Lazy Validator validator,
                                                                               ObjectProvider<MethodValidationExcludeFilter> excludeFilters,
-                                                                              ValidationGroupsProvider validationGroupsProvider) {
+                                                                              MethodValidationGroupsProvider methodVidationGroupsProvider) {
         FilteredMethodValidationPostProcessor processor = new FinalFilteredMethodValidationPostProcessor(
-                excludeFilters.orderedStream(), validationGroupsProvider);
+                excludeFilters.orderedStream(), methodVidationGroupsProvider);
         boolean proxyTargetClass = environment.getProperty("spring.aop.proxy-target-class", Boolean.class, true);
         processor.setProxyTargetClass(proxyTargetClass);
         processor.setValidator(validator);
