@@ -102,6 +102,7 @@ public class FinalSecurityAutoConfiguration {
         http.cors().configurationSource(source);
 
 
+
         session(http, securityProperties.getSession());
 
         basic(http, securityProperties.getBasic());

@@ -21,19 +21,18 @@ import javax.validation.executable.ExecutableValidator;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.boot.autoconfigure.condition.SearchStrategy;
 import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
-import org.springframework.boot.validation.beanvalidation.FilteredMethodValidationPostProcessor;
 import org.springframework.boot.validation.beanvalidation.MethodValidationExcludeFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
+import org.ifinalframework.validation.GlobalValidationGroupsProvider;
 import org.ifinalframework.validation.MethodValidationGroupsProvider;
 import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidationPostProcessor;
 
@@ -46,7 +45,6 @@ import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidati
  * @since 1.5.0
  */
 @AutoConfiguration
-@ConditionalOnBean(MethodValidationGroupsProvider.class)
 @ConditionalOnClass(ExecutableValidator.class)
 @ConditionalOnResource(resources = "classpath:META-INF/services/javax.validation.spi.ValidationProvider")
 @AutoConfigureBefore(ValidationAutoConfiguration.class)
@@ -57,9 +55,11 @@ public class FinalValidationAutoConfiguration {
     public static MethodValidationPostProcessor methodValidationPostProcessor(Environment environment,
                                                                               @Lazy Validator validator,
                                                                               ObjectProvider<MethodValidationExcludeFilter> excludeFilters,
-                                                                              MethodValidationGroupsProvider methodVidationGroupsProvider) {
-        FilteredMethodValidationPostProcessor processor = new FinalFilteredMethodValidationPostProcessor(
-                excludeFilters.orderedStream(), methodVidationGroupsProvider);
+                                                                              ObjectProvider<GlobalValidationGroupsProvider> globalValidationGroupsProvider,
+                                                                              ObjectProvider<MethodValidationGroupsProvider> methodValidationGroupsProvider) {
+        FinalFilteredMethodValidationPostProcessor processor = new FinalFilteredMethodValidationPostProcessor(excludeFilters.orderedStream());
+        globalValidationGroupsProvider.ifAvailable(processor::setGlobalValidationGroupsProvider);
+        methodValidationGroupsProvider.ifAvailable(processor::setMethodValidationGroupsProvider);
         boolean proxyTargetClass = environment.getProperty("spring.aop.proxy-target-class", Boolean.class, true);
         processor.setProxyTargetClass(proxyTargetClass);
         processor.setValidator(validator);
