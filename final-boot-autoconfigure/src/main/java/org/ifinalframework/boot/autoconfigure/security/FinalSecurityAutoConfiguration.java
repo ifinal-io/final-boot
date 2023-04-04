@@ -20,15 +20,20 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,15 +43,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
+import org.ifinalframework.core.result.R;
+import org.ifinalframework.core.result.Result;
+import org.ifinalframework.json.Json;
+import org.ifinalframework.security.config.HttpSecurityConfigurer;
 import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
 import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
 import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
+import org.ifinalframework.util.CompositeProxies;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -73,6 +84,12 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnClass(DefaultAuthenticationEventPublisher.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class FinalSecurityAutoConfiguration {
+
+    private final HttpSecurityConfigurer httpSecurityConfigurer;
+
+    public FinalSecurityAutoConfiguration(ObjectProvider<List<HttpSecurityConfigurer>> httpSecurityConfigurer) {
+        this.httpSecurityConfigurer = CompositeProxies.composite(HttpSecurityConfigurer.class, httpSecurityConfigurer.getIfAvailable());
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -102,8 +119,8 @@ public class FinalSecurityAutoConfiguration {
         http.cors().configurationSource(source);
 
 
-
         session(http, securityProperties.getSession());
+
 
         basic(http, securityProperties.getBasic());
         rememberMe(http, securityProperties.getRememberMe());
@@ -132,10 +149,23 @@ public class FinalSecurityAutoConfiguration {
             http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
         });
 
-        FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().anyRequest().permitAll().and().formLogin().loginPage("/api/login").permitAll();
 
+
+        FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.formLogin().loginPage("/api/login").permitAll();
         applicationContext.getBeanProvider(ResultAuthenticationSuccessHandler.class).ifAvailable(formLoginConfigurer::successHandler);
         applicationContext.getBeanProvider(ResultAuthenticationFailureHandler.class).ifAvailable(formLoginConfigurer::failureHandler);
+
+        httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
+
+        http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
+            @Override
+            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+                final Result<Object> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+                response.getWriter().write(Json.toJson(result));
+            }
+        });
 
 
         return http.build();
