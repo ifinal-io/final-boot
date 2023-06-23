@@ -93,6 +93,14 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <!--Final Framework-->
+            <dependency>
+                <groupId>org.ifinalframework.security</groupId>
+                <artifactId>final-security</artifactId>
+                <version>${final.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <!--Final Data-->
             <dependency>
                 <groupId>org.ifinalframework.data</groupId>
