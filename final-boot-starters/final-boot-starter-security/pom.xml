@@ -34,7 +34,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.ifinalframework</groupId>
+            <groupId>org.ifinalframework.security</groupId>
             <artifactId>final-security-core</artifactId>
         </dependency>
     </dependencies>
