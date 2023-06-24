@@ -15,16 +15,16 @@
 
 package org.ifinalframework.boot.autoconfigure.security;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-
+import lombok.extern.slf4j.Slf4j;
+import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
+import org.ifinalframework.core.result.R;
+import org.ifinalframework.core.result.Result;
+import org.ifinalframework.json.Json;
+import org.ifinalframework.security.config.HttpSecurityConfigurer;
+import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
+import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
+import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
+import org.ifinalframework.util.CompositeProxies;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,6 +39,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -48,17 +50,15 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
-import org.ifinalframework.core.result.R;
-import org.ifinalframework.core.result.Result;
-import org.ifinalframework.json.Json;
-import org.ifinalframework.security.config.HttpSecurityConfigurer;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
-import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
-import org.ifinalframework.util.CompositeProxies;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * SecurityAutoConfiguration.
@@ -92,7 +92,11 @@ public class FinalSecurityAutoConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        final PasswordEncoder delegatingPasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        if (delegatingPasswordEncoder instanceof DelegatingPasswordEncoder) {
+            ((DelegatingPasswordEncoder) delegatingPasswordEncoder).setDefaultPasswordEncoderForMatches(NoOpPasswordEncoder.getInstance());
+        }
+        return delegatingPasswordEncoder;
     }
 
     @Bean
@@ -147,7 +151,6 @@ public class FinalSecurityAutoConfiguration {
             logger.info("addFilterAt UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
             http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
         });
-
 
 
         FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.formLogin().loginPage("/api/login").permitAll();
