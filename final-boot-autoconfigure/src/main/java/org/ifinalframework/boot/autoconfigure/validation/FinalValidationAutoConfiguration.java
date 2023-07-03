@@ -15,9 +15,9 @@
 
 package org.ifinalframework.boot.autoconfigure.validation;
 
-import javax.validation.Validator;
-import javax.validation.executable.ExecutableValidator;
 
+import jakarta.validation.Validator;
+import jakarta.validation.executable.ExecutableValidator;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

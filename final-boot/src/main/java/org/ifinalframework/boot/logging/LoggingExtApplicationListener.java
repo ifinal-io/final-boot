@@ -25,8 +25,10 @@ import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.spi.ContextAware;
 import ch.qos.logback.core.spi.LifeCycle;
+import ch.qos.logback.core.spi.ScanException;
 import ch.qos.logback.core.util.FileSize;
 import ch.qos.logback.core.util.OptionHelper;
+import lombok.SneakyThrows;
 import org.ifinalframework.auto.spring.factory.annotation.SpringApplicationListener;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -82,6 +84,7 @@ public class LoggingExtApplicationListener implements ApplicationListener<Applic
 
     private PropertyResolver patterns;
 
+    @SneakyThrows
     @Override
     public void onApplicationEvent(final ApplicationEnvironmentPreparedEvent event) {
         ConfigurableEnvironment environment = event.getEnvironment();
@@ -115,7 +118,7 @@ public class LoggingExtApplicationListener implements ApplicationListener<Applic
         return environment;
     }
 
-    private Appender<ILoggingEvent> fileAppender(final String logFile) {
+    private Appender<ILoggingEvent> fileAppender(final String logFile) throws ScanException {
         RollingFileAppender<ILoggingEvent> appender = new RollingFileAppender<>();
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
         String logPattern = this.patterns.getProperty("logging.pattern.file", FILE_LOG_PATTERN);
