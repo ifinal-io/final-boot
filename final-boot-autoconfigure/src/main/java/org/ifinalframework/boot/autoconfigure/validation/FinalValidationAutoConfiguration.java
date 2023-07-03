@@ -42,11 +42,12 @@ import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidati
  * @author ilikly
  * @version 1.5.0
  * @see ValidationAutoConfiguration
+ * @see jakarta.validation.spi.ValidationProvider
  * @since 1.5.0
  */
 @AutoConfiguration
 @ConditionalOnClass(ExecutableValidator.class)
-@ConditionalOnResource(resources = "classpath:META-INF/services/javax.validation.spi.ValidationProvider")
+@ConditionalOnResource(resources = "classpath:META-INF/services/jakarta.validation.spi.ValidationProvider")
 @AutoConfigureBefore(ValidationAutoConfiguration.class)
 public class FinalValidationAutoConfiguration {
 
