@@ -36,6 +36,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AnonymousConfigurer;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -188,7 +189,13 @@ public class FinalSecurityAutoConfiguration {
         if (Objects.isNull(anonymousProperties) || !Boolean.TRUE.equals(anonymousProperties.getEnable())) {
             return;
         }
-        http.anonymous();
+        final AnonymousConfigurer<HttpSecurity> anonymous = http.anonymous();
+
+        if(Objects.nonNull(anonymousProperties.getAuthorities())){
+            anonymous.authorities(anonymousProperties.getAuthorities());
+        }
+
+
     }
 
 

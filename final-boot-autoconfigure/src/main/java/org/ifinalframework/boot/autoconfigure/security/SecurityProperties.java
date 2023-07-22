@@ -83,5 +83,6 @@ public class SecurityProperties {
     @Getter
     public static class AnonymousProperties {
         private Boolean enable;
+        private String[] authorities;
     }
 }
