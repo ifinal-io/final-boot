@@ -16,7 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.web.i18n;
 
 import org.ifinalframework.context.util.Messages;
-import org.ifinalframework.web.servlet.i18n.I18NLocaleResolver;
+import org.ifinalframework.web.servlet.i18n.MixLocaleResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -48,8 +48,8 @@ public class I18NWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
 
     @Bean(name = "localeResolver")
     @ConditionalOnMissingBean(LocaleResolver.class)
-    public I18NLocaleResolver localeResolver() {
-        I18NLocaleResolver localeResolver = new I18NLocaleResolver();
+    public MixLocaleResolver localeResolver() {
+        MixLocaleResolver localeResolver = new MixLocaleResolver();
         localeResolver.setDefaultLocale(properties.getDefaultLocale());
         localeResolver.setSupportedLocales(properties.getSupportedLocales());
 
