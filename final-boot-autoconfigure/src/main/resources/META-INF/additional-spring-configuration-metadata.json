@@ -43,15 +43,17 @@
       "defaultValue": true
     }
   ],
-  "hints": [{
-    "name": "final.security.user-class",
-    "providers": [
-      {
-        "name": "class-reference",
-        "parameters": {
-          "target": "org.ifinalframework.core.IUser"
+  "hints": [
+    {
+      "name": "final.security.user-class",
+      "providers": [
+        {
+          "name": "class-reference",
+          "parameters": {
+            "target": "org.ifinalframework.core.IUser"
+          }
         }
-      }
-    ]
-  }]
+      ]
+    }
+  ]
 }

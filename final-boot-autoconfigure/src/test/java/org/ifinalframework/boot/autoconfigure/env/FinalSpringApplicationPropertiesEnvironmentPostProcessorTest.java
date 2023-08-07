@@ -15,12 +15,13 @@
 
 package org.ifinalframework.boot.autoconfigure.env;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.logging.DeferredLogs;
 import org.springframework.core.env.StandardEnvironment;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * FinalSpringApplicationPropertiesEnvironmentPostProcessorTest.
@@ -31,7 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class FinalSpringApplicationPropertiesEnvironmentPostProcessorTest {
     private FinalSpringApplicationPropertiesEnvironmentPostProcessor environmentPostProcessor
-            = new FinalSpringApplicationPropertiesEnvironmentPostProcessor(new DeferredLogs().getLog(FinalSpringApplicationPropertiesEnvironmentPostProcessor.class));
+            = new FinalSpringApplicationPropertiesEnvironmentPostProcessor(
+                    new DeferredLogs()
+                            .getLog(FinalSpringApplicationPropertiesEnvironmentPostProcessor.class)
+    );
 
 
     @Test

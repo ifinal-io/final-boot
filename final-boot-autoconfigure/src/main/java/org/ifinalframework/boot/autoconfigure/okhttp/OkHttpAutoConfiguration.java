@@ -15,7 +15,7 @@
 
 package org.ifinalframework.boot.autoconfigure.okhttp;
 
-import java.util.concurrent.TimeUnit;
+import okhttp3.OkHttpClient;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import okhttp3.OkHttpClient;
+import java.util.concurrent.TimeUnit;
 
 /**
  * OkHttpAutoConfiguration.

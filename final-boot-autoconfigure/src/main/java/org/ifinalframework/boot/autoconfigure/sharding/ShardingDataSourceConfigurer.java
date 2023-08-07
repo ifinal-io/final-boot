@@ -15,12 +15,6 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import lombok.Setter;
-import org.ifinalframework.data.jdbc.DataSourceFactory;
-import org.ifinalframework.data.jdbc.DataSourceFactoryManager;
-import org.ifinalframework.data.sharding.config.ShardingConfigurer;
-import org.ifinalframework.data.sharding.config.ShardingDataSourceRegistry;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -30,11 +24,19 @@ import org.springframework.core.env.Environment;
 import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
 
+import org.ifinalframework.data.jdbc.DataSourceFactory;
+import org.ifinalframework.data.jdbc.DataSourceFactoryManager;
+import org.ifinalframework.data.sharding.config.ShardingConfigurer;
+import org.ifinalframework.data.sharding.config.ShardingDataSourceRegistry;
+
+import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
+
 import javax.sql.DataSource;
+
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
+import lombok.Setter;
 
 /**
  * @author ilikly
@@ -70,7 +72,8 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
             registry.addDataSource(DEFAULT_DATASOURCE_NAME, create(dataSourceProperties, "spring.datasource"));
         } else {
             for (Map.Entry<String, DataSourceProperties> entry : properties.getDatasource().entrySet()) {
-                final DataSource dataSource = create(entry.getValue(), ShardingDataSourceProperties.DEFAULT_DATASOURCE_PREFIX + ".datasource." + entry.getKey());
+                final String prefix = ShardingDataSourceProperties.DEFAULT_DATASOURCE_PREFIX + ".datasource." + entry.getKey();
+                final DataSource dataSource = create(entry.getValue(), prefix);
                 registry.addDataSource(entry.getKey(), dataSource);
             }
         }
@@ -78,7 +81,8 @@ public class ShardingDataSourceConfigurer implements ShardingConfigurer, Environ
     }
 
     private DataSource create(DataSourceProperties properties, String prefix) throws SQLException {
-        final DataSourceFactory<? extends DataSource> dataSourceFactory = dataSourceFactoryManager.getDataSourceFactory(properties.getType());
+        final DataSourceFactory<? extends DataSource> dataSourceFactory
+                = dataSourceFactoryManager.getDataSourceFactory(properties.getType());
         return dataSourceFactory.create(properties, environment, prefix);
 
     }

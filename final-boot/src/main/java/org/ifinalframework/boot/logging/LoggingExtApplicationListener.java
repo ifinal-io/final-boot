@@ -28,9 +28,7 @@ import ch.qos.logback.core.spi.LifeCycle;
 import ch.qos.logback.core.spi.ScanException;
 import ch.qos.logback.core.util.FileSize;
 import ch.qos.logback.core.util.OptionHelper;
-import lombok.SneakyThrows;
-import org.ifinalframework.auto.spring.factory.annotation.SpringApplicationListener;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.logging.LoggingApplicationListener;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -44,12 +42,18 @@ import org.springframework.core.env.PropertySourcesPropertyResolver;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.unit.DataSize;
 
+import org.ifinalframework.auto.spring.factory.annotation.SpringApplicationListener;
+
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import lombok.SneakyThrows;
 
 /**
  * LoggingExtApplicationListener.

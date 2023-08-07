@@ -16,8 +16,6 @@
 package org.ifinalframework.boot.autoconfigure.validation;
 
 
-import jakarta.validation.Validator;
-import jakarta.validation.executable.ExecutableValidator;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -36,6 +34,9 @@ import org.ifinalframework.validation.GlobalValidationGroupsProvider;
 import org.ifinalframework.validation.MethodValidationGroupsProvider;
 import org.ifinalframework.validation.beanvalidation.FinalFilteredMethodValidationPostProcessor;
 
+import jakarta.validation.Validator;
+import jakarta.validation.executable.ExecutableValidator;
+
 /**
  * FinalValidationAutoConfiguration.
  *
@@ -53,12 +54,14 @@ public class FinalValidationAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(search = SearchStrategy.CURRENT)
-    public static MethodValidationPostProcessor methodValidationPostProcessor(Environment environment,
-                                                                              @Lazy Validator validator,
-                                                                              ObjectProvider<MethodValidationExcludeFilter> excludeFilters,
-                                                                              ObjectProvider<GlobalValidationGroupsProvider> globalValidationGroupsProvider,
-                                                                              ObjectProvider<MethodValidationGroupsProvider> methodValidationGroupsProvider) {
-        FinalFilteredMethodValidationPostProcessor processor = new FinalFilteredMethodValidationPostProcessor(excludeFilters.orderedStream());
+    public static MethodValidationPostProcessor methodValidationPostProcessor(
+            Environment environment,
+            @Lazy Validator validator,
+            ObjectProvider<MethodValidationExcludeFilter> excludeFilters,
+            ObjectProvider<GlobalValidationGroupsProvider> globalValidationGroupsProvider,
+            ObjectProvider<MethodValidationGroupsProvider> methodValidationGroupsProvider) {
+        FinalFilteredMethodValidationPostProcessor processor
+                = new FinalFilteredMethodValidationPostProcessor(excludeFilters.orderedStream());
         globalValidationGroupsProvider.ifAvailable(processor::setGlobalValidationGroupsProvider);
         methodValidationGroupsProvider.ifAvailable(processor::setMethodValidationGroupsProvider);
         boolean proxyTargetClass = environment.getProperty("spring.aop.proxy-target-class", Boolean.class, true);

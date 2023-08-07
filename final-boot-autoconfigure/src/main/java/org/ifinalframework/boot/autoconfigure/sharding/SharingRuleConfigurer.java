@@ -15,14 +15,14 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import org.ifinalframework.data.sharding.config.ShardingConfigurer;
-import org.ifinalframework.data.sharding.config.ShardingTableRegistry;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
+
+import org.ifinalframework.data.sharding.config.ShardingConfigurer;
+import org.ifinalframework.data.sharding.config.ShardingTableRegistry;
 
 import java.util.Map;
 import java.util.Objects;

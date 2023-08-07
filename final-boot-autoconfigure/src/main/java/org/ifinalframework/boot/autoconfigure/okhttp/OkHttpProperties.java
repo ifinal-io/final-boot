@@ -15,13 +15,14 @@
 
 package org.ifinalframework.boot.autoconfigure.okhttp;
 
-import java.util.concurrent.TimeUnit;
+import okhttp3.OkHttpClient.Builder;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.concurrent.TimeUnit;
+
 import lombok.Getter;
 import lombok.Setter;
-import okhttp3.OkHttpClient.Builder;
 
 /**
  * OkHttpProperties.

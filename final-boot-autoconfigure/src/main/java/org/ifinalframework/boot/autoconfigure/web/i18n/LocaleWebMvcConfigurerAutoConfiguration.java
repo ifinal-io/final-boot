@@ -15,8 +15,6 @@
 
 package org.ifinalframework.boot.autoconfigure.web.i18n;
 
-import org.ifinalframework.context.util.Messages;
-import org.ifinalframework.web.servlet.i18n.MixLocaleResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,6 +26,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import org.ifinalframework.context.util.Messages;
+import org.ifinalframework.web.servlet.i18n.MixLocaleResolver;
+
 /**
  * @author ilikly
  * @version 1.0.0
@@ -35,12 +36,12 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
  */
 @Configuration
 @ConditionalOnClass(LocaleResolver.class)
-@EnableConfigurationProperties(I18NProperties.class)
-public class I18NWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
+@EnableConfigurationProperties(LocaleProperties.class)
+public class LocaleWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
 
-    private final I18NProperties properties;
+    private final LocaleProperties properties;
 
-    public I18NWebMvcConfigurerAutoConfiguration(final I18NProperties properties, final MessageSource messageSource) {
+    public LocaleWebMvcConfigurerAutoConfiguration(final LocaleProperties properties, final MessageSource messageSource) {
 
         this.properties = properties;
         Messages.setMessageSource(messageSource);

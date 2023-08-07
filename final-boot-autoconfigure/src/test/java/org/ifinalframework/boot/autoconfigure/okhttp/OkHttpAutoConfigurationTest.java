@@ -16,6 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.okhttp;
 
 import okhttp3.OkHttpClient;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +33,6 @@ class OkHttpAutoConfigurationTest {
     @Test
     void okHttpClient() {
         OkHttpClient okHttpClient = new OkHttpAutoConfiguration().okHttpClient(new OkHttpProperties());
-        assertEquals(okHttpClient.connectTimeoutMillis(),10000);
+        assertEquals(okHttpClient.connectTimeoutMillis(), 10000);
     }
 }

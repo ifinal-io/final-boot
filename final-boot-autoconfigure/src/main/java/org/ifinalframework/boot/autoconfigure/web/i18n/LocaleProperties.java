@@ -27,7 +27,7 @@ import java.util.Locale;
  * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "final.i18n")
-public class I18NProperties implements Serializable {
+public class LocaleProperties implements Serializable {
 
     private static final String DEFAULT_LOCALE_PARAM_NAME = "lang";
 

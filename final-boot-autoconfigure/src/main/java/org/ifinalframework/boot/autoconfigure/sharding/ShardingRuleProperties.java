@@ -15,14 +15,16 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import lombok.Data;
-import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import lombok.Data;
 
 /**
  * @author ilikly

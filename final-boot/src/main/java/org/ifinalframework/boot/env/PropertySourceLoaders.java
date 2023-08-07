@@ -15,8 +15,6 @@
 
 package org.ifinalframework.boot.env;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
@@ -30,6 +28,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Load {@link PropertySource}s from {@code locations} with {@link PropertySourceLoader}

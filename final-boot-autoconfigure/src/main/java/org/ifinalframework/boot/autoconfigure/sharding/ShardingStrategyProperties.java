@@ -15,11 +15,11 @@
 
 package org.ifinalframework.boot.autoconfigure.sharding;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Properties;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 分片策略

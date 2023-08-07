@@ -15,7 +15,7 @@
 
 package org.ifinalframework.boot.autoconfigure.jackson;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -26,7 +26,7 @@ import org.ifinalframework.json.Json;
 import org.ifinalframework.json.jackson.ObjectMapperFactory;
 import org.ifinalframework.json.jackson.deserializer.LocalDateTimeExtDeserializer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
 
 /**
  * FinalJackson2ObjectMapperBuilderCustomizer.
@@ -43,7 +43,7 @@ public class FinalJackson2ObjectMapperBuilderCustomizer implements Jackson2Objec
         jacksonObjectMapperBuilder.deserializerByType(LocalDateTime.class, new LocalDateTimeExtDeserializer());
         jacksonObjectMapperBuilder.postConfigurer(objectMapper -> {
             ObjectMapper mapper = new ObjectMapperFactory(objectMapper).create();
-//            JsonRegistry.getInstance().register(new JacksonJsonService(mapper));
+            //            JsonRegistry.getInstance().register(new JacksonJsonService(mapper));
         });
     }
 }

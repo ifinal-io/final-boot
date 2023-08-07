@@ -48,15 +48,17 @@
       "defaultValue": "org.ifinalframework.core.IUser"
     }
   ],
-  "hints": [{
-    "name": "final.data.spi.user-class",
-    "providers": [
-      {
-        "name": "class-reference",
-        "parameters": {
-          "target": "org.ifinalframework.core.IUser"
+  "hints": [
+    {
+      "name": "final.data.spi.user-class",
+      "providers": [
+        {
+          "name": "class-reference",
+          "parameters": {
+            "target": "org.ifinalframework.core.IUser"
+          }
         }
-      }
-    ]
-  }]
+      ]
+    }
+  ]
 }

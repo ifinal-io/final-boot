@@ -15,15 +15,18 @@
 
 package org.ifinalframework.boot.autoconfigure.env;
 
-import lombok.RequiredArgsConstructor;
-import org.apache.commons.logging.Log;
-import org.ifinalframework.auto.spring.factory.annotation.SpringFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.support.ResourcePropertySource;
 
+import org.ifinalframework.auto.spring.factory.annotation.SpringFactory;
+
+import org.apache.commons.logging.Log;
+
 import java.io.IOException;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Load {@code META-INF/final-spring-application.properties} into {@link ConfigurableEnvironment}.
@@ -46,7 +49,8 @@ public class FinalSpringApplicationPropertiesEnvironmentPostProcessor implements
 
 
         try {
-            final ResourcePropertySource propertySource = new ResourcePropertySource("finalSpringApplication", FINAL_SPRING_APPLICATION_PROPERTIES, application.getClassLoader());
+            final ResourcePropertySource propertySource = new ResourcePropertySource("finalSpringApplication",
+                    FINAL_SPRING_APPLICATION_PROPERTIES, application.getClassLoader());
 
             environment.getPropertySources().addLast(propertySource);
         } catch (IOException e) {

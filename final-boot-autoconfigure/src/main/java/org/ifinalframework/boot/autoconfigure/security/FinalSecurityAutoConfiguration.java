@@ -15,16 +15,6 @@
 
 package org.ifinalframework.boot.autoconfigure.security;
 
-import lombok.extern.slf4j.Slf4j;
-import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
-import org.ifinalframework.core.result.R;
-import org.ifinalframework.core.result.Result;
-import org.ifinalframework.json.Json;
-import org.ifinalframework.security.config.HttpSecurityConfigurer;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
-import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
-import org.ifinalframework.util.CompositeProxies;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -49,14 +39,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
+import org.ifinalframework.core.result.R;
+import org.ifinalframework.core.result.Result;
+import org.ifinalframework.json.Json;
+import org.ifinalframework.security.config.HttpSecurityConfigurer;
+import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
+import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
+import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
+import org.ifinalframework.util.CompositeProxies;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SecurityAutoConfiguration.
@@ -98,7 +101,9 @@ public class FinalSecurityAutoConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain corsSecurityFilterChain(ApplicationContext applicationContext, HttpSecurity http, CorsProperties corsProperties, SecurityProperties securityProperties) throws Exception {
+    public SecurityFilterChain corsSecurityFilterChain(ApplicationContext applicationContext, HttpSecurity http,
+                                                       CorsProperties corsProperties,
+                                                       SecurityProperties securityProperties) throws Exception {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         if (Objects.nonNull(corsProperties.getAllowedHeaders())) {
             corsConfiguration.setAllowedHeaders(Arrays.asList(corsProperties.getAllowedHeaders()));
@@ -148,14 +153,11 @@ public class FinalSecurityAutoConfiguration {
 
         httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
 
-        http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
-            @Override
-            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-                final Result<Object> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-                response.getWriter().write(Json.toJson(result));
-            }
+        http.exceptionHandling().accessDeniedHandler((request, response, accessDeniedException) -> {
+            final Result<Object> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+            response.getWriter().write(Json.toJson(result));
         });
 
 
@@ -191,7 +193,7 @@ public class FinalSecurityAutoConfiguration {
         }
         final AnonymousConfigurer<HttpSecurity> anonymous = http.anonymous();
 
-        if(Objects.nonNull(anonymousProperties.getAuthorities())){
+        if (Objects.nonNull(anonymousProperties.getAuthorities())) {
             anonymous.authorities(anonymousProperties.getAuthorities());
         }
 

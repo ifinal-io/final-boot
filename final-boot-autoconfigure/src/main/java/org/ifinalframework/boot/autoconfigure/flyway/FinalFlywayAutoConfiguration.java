@@ -43,7 +43,7 @@ import org.flywaydb.core.Flyway;
 public class FinalFlywayAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "spring.flyway",name = "clean-schema-history-on-after-migrate-operation-finish")
+    @ConditionalOnProperty(prefix = "spring.flyway", name = "clean-schema-history-on-after-migrate-operation-finish")
     public CleanFlywaySchemaHistoryCallback cleanFlywaySchemaHistoryCallback(FinalFlywayProperties properties) {
         final CleanFlywaySchemaHistoryCallback callback = new CleanFlywaySchemaHistoryCallback();
         callback.setCleanSql(properties.getCleanSchemaHistorySql());

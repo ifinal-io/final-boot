@@ -47,19 +47,28 @@ public class SecurityProperties {
 
     private AnonymousProperties anonymous = new AnonymousProperties();
 
+    /**
+     * SessionProperties
+     */
     @Setter
     @Getter
-    public static class SessionProperties{
+    public static class SessionProperties {
         private Boolean enable = true;
         private SessionCreationPolicy creationPolicy;
     }
 
+    /**
+     * BasicProperties
+     */
     @Setter
     @Getter
     public static class BasicProperties {
         private Boolean enable = false;
     }
 
+    /**
+     * RememberMeProperties
+     */
     @Setter
     @Getter
     public static class RememberMeProperties {
@@ -69,6 +78,9 @@ public class SecurityProperties {
     }
 
 
+    /**
+     * LogoutProperties
+     */
     @Setter
     @Getter
     public static class LogoutProperties {
@@ -79,6 +91,9 @@ public class SecurityProperties {
         private Class<? extends LogoutSuccessHandler> successHandler;
     }
 
+    /**
+     * AnonymousProperties
+     */
     @Setter
     @Getter
     public static class AnonymousProperties {

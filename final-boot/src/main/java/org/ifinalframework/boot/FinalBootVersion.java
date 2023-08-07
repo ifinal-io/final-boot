@@ -15,8 +15,9 @@
 
 package org.ifinalframework.boot;
 
-import lombok.experimental.UtilityClass;
 import org.ifinalframework.util.JarVersions;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * FinalBootVersion.

@@ -34,7 +34,8 @@ class RedisAutoConfigurationTest {
 
     @Test
     void objectStringJsonRedisTemplate() {
-        ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate = new RedisAutoConfiguration().objectStringJsonRedisTemplate(Mockito.mock(RedisConnectionFactory.class));
+        ObjectStringJsonRedisTemplate objectStringJsonRedisTemplate = new RedisAutoConfiguration()
+                .objectStringJsonRedisTemplate(Mockito.mock(RedisConnectionFactory.class));
         Assertions.assertNotNull(objectStringJsonRedisTemplate);
     }
 }
