@@ -18,8 +18,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.ifinalframework.project</groupId>
-        <artifactId>final-project</artifactId>
-        <version>1.5.2</version>
+        <artifactId>final-dependencies</artifactId>
+        <version>1.5.3-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.ifinalframework.boot</groupId>
