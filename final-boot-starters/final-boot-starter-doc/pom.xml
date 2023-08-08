@@ -20,7 +20,7 @@
     <parent>
         <artifactId>final-boot-parent</artifactId>
         <groupId>org.ifinalframework.boot</groupId>
-        <version>1.5.2-SNAPSHOT</version>
+        <version>1.5.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
