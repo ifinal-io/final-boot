@@ -36,6 +36,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -105,13 +106,13 @@ public class FinalSecurityAutoConfiguration {
                                                        CorsProperties corsProperties,
                                                        SecurityProperties securityProperties) throws Exception {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        if (Objects.nonNull(corsProperties.getAllowedHeaders())) {
+        if (Objects.nonNull(corsProperties.getAllowedHeaders()) && corsProperties.getAllowedHeaders().length > 0) {
             corsConfiguration.setAllowedHeaders(Arrays.asList(corsProperties.getAllowedHeaders()));
         }
-        if (Objects.nonNull(corsProperties.getAllowedMethods())) {
+        if (Objects.nonNull(corsProperties.getAllowedMethods()) && corsProperties.getAllowedMethods().length > 0) {
             corsConfiguration.setAllowedMethods(Arrays.asList(corsProperties.getAllowedMethods()));
         }
-        if (Objects.nonNull(corsProperties.getAllowedOrigins())) {
+        if (Objects.nonNull(corsProperties.getAllowedOrigins()) && corsProperties.getAllowedOrigins().length > 0) {
             corsConfiguration.setAllowedOrigins(Arrays.asList(corsProperties.getAllowedOrigins()));
         }
         if (Objects.nonNull(corsProperties.getAllowCredentials())) {
@@ -120,9 +121,12 @@ public class FinalSecurityAutoConfiguration {
         if (Objects.nonNull(corsProperties.getMaxAge())) {
             corsConfiguration.setMaxAge(corsProperties.getMaxAge());
         }
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration(corsProperties.getMapping(), corsConfiguration);
-        http.cors().configurationSource(source);
+
+        if(StringUtils.hasLength(corsProperties.getMapping())) {
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration(corsProperties.getMapping(), corsConfiguration);
+            http.cors().configurationSource(source);
+        }
 
 
         session(http, securityProperties.getSession());
