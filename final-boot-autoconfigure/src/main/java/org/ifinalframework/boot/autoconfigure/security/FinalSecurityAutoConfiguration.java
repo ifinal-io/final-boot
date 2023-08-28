@@ -115,6 +115,11 @@ public class FinalSecurityAutoConfiguration {
         if (Objects.nonNull(corsProperties.getAllowedOrigins()) && corsProperties.getAllowedOrigins().length > 0) {
             corsConfiguration.setAllowedOrigins(Arrays.asList(corsProperties.getAllowedOrigins()));
         }
+        if (Objects.nonNull(corsProperties.getAllowedOriginPatterns()) && corsProperties.getAllowedOriginPatterns().length > 0) {
+            corsConfiguration.setAllowedOriginPatterns(Arrays.asList(corsProperties.getAllowedOriginPatterns()));
+        }
+
+
         if (Objects.nonNull(corsProperties.getAllowCredentials())) {
             corsConfiguration.setAllowCredentials(corsProperties.getAllowCredentials());
         }

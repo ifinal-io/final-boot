@@ -19,6 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.servlet.config.annotation.CorsRegistration;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 
@@ -61,6 +62,8 @@ public class CorsProperties implements Serializable {
      * @see CorsRegistration#allowedOrigins(String...)
      */
     private String[] allowedOrigins;
+
+    private String[] allowedOriginPatterns;
 
     private Long maxAge;
 

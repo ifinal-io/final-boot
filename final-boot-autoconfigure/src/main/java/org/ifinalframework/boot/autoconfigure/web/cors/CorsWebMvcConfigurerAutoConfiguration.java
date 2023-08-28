@@ -45,11 +45,13 @@ public class CorsWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
 
+
         if (Objects.isNull(corsProperties.getMapping())) {
             return;
         }
 
         CorsRegistration registration = registry.addMapping(corsProperties.getMapping());
+
 
         if (Objects.nonNull(corsProperties.getAllowCredentials())) {
             registration.allowCredentials(corsProperties.getAllowCredentials());
@@ -65,6 +67,10 @@ public class CorsWebMvcConfigurerAutoConfiguration implements WebMvcConfigurer {
 
         if (Objects.nonNull(corsProperties.getAllowedMethods())) {
             registration.allowedMethods(corsProperties.getAllowedMethods());
+        }
+
+        if (Objects.nonNull(corsProperties.getAllowedOriginPatterns()) && corsProperties.getAllowedOriginPatterns().length > 0) {
+            registration.allowedOriginPatterns(corsProperties.getAllowedOriginPatterns());
         }
 
     }
