@@ -40,7 +40,7 @@ import jakarta.validation.executable.ExecutableValidator;
 /**
  * FinalValidationAutoConfiguration.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.5.0
  * @see ValidationAutoConfiguration
  * @see jakarta.validation.spi.ValidationProvider

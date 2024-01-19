@@ -27,7 +27,7 @@ import lombok.Setter;
 /**
  * OkHttpProperties.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.4.0
  * @since 1.4.0
  */

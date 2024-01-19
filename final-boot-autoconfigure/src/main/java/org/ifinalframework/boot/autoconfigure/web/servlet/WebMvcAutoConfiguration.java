@@ -27,7 +27,7 @@ import org.ifinalframework.web.servlet.filter.RequestURIRewriteRequestFilter;
 /**
  * WebServletAutoConfiguration
  *
- * @author mik
+ * @author iimik
  * @since 1.5.6
  **/
 @Configuration

@@ -27,7 +27,7 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @see org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration
  * @since 1.0.0

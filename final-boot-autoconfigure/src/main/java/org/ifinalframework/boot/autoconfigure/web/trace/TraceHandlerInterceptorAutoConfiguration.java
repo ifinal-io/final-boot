@@ -24,7 +24,7 @@ import org.ifinalframework.auto.spring.factory.annotation.SpringAutoConfiguratio
 import org.ifinalframework.web.servlet.interceptor.TraceHandlerInterceptor;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @since 1.0.0
  */

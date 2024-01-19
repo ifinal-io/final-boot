@@ -23,7 +23,7 @@ import lombok.Setter;
 /**
  * FlywayProperties.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.5.0
  * @see org.springframework.boot.autoconfigure.flyway.FlywayProperties
  * @since 1.5.0

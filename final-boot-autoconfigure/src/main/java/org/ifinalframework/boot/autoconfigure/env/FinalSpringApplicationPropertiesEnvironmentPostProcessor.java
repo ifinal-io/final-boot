@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Load {@code META-INF/final-spring-application.properties} into {@link ConfigurableEnvironment}.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.2.3
  * @since 1.2.3
  */

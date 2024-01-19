@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Load {@link PropertySource}s from {@code locations} with {@link PropertySourceLoader}
  *
- * @author ilikly
+ * @author iimik
  * @version 1.3.1
  * @see PropertySourceLoader
  * @see ResourceLoader

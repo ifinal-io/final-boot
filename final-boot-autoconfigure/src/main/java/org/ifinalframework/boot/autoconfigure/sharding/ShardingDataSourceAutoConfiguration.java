@@ -24,7 +24,7 @@ import org.ifinalframework.data.sharding.config.ShardingDataSourceSupport;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @since 1.0.0
  */

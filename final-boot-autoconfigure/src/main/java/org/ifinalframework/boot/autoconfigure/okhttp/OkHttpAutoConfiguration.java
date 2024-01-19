@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * OkHttpAutoConfiguration.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.4.0
  * @since 1.4.0
  */

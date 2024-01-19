@@ -25,7 +25,7 @@ import org.ifinalframework.data.redis.ObjectStringJsonRedisTemplate;
 import org.ifinalframework.data.redis.RedisRegistry;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
  * @since 1.0.0

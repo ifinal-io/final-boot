@@ -20,7 +20,7 @@ import org.apache.shardingsphere.sharding.api.config.rule.ShardingTableRuleConfi
 import java.io.Serializable;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @see ShardingTableRuleConfiguration
  * @since 1.0.0

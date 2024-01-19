@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * FinalSpringApplicationPropertiesEnvironmentPostProcessorTest.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.2.3
  * @since 1.2.3
  */

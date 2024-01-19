@@ -28,7 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 /**
  * CorsWebMvcConfigurerAutoConfigurationTest.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.4.2
  * @since 1.4.2
  */

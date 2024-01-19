@@ -39,7 +39,7 @@ import java.util.Map;
 import lombok.Setter;
 
 /**
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @since 1.0.0
  */

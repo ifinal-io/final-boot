@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * WebMvcRequestURIRewriteProperties
  *
- * @author mik
+ * @author iimik
  * @since 1.5.6
  **/
 @Setter

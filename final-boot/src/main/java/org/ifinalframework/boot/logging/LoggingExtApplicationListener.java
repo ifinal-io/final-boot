@@ -58,7 +58,7 @@ import lombok.SneakyThrows;
 /**
  * LoggingExtApplicationListener.
  *
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @see LoggingApplicationListener
  * @see org.springframework.boot.logging.LoggingSystem

@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * 分片策略
  *
- * @author ilikly
+ * @author iimik
  * @version 1.0.0
  * @since 1.0.0
  */

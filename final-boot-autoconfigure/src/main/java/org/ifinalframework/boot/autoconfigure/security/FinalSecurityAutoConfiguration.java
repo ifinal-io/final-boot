@@ -65,7 +65,7 @@ import lombok.extern.slf4j.Slf4j;
  *      http.httpBasic();
  * </pre>
  *
- * @author ilikly
+ * @author iimik
  * @version 1.5.0
  * @see org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
  * @see org.springframework.security.web.authentication.www.BasicAuthenticationFilter
