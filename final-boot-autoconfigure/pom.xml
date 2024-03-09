@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.ifinalframework.security</groupId>
-            <artifactId>final-security-core</artifactId>
+            <artifactId>final-security-web</artifactId>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
