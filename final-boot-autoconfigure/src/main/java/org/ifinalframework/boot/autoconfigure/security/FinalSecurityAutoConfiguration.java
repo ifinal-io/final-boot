@@ -156,7 +156,7 @@ public class FinalSecurityAutoConfiguration {
         httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
 
         http.exceptionHandling().accessDeniedHandler((request, response, accessDeniedException) -> {
-            final Result<Object> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
+            final Result<?> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
             response.getWriter().write(Json.toJson(result));
