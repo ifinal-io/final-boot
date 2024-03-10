@@ -16,6 +16,7 @@
 package org.ifinalframework.boot.autoconfigure.security;
 
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -34,6 +35,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -46,6 +48,8 @@ import org.ifinalframework.security.config.HttpSecurityConfigurer;
 import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
 import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
 import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
+import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationFilter;
+import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationService;
 import org.ifinalframework.util.CompositeProxies;
 
 import java.nio.charset.StandardCharsets;
@@ -92,6 +96,12 @@ public class FinalSecurityAutoConfiguration {
             ((DelegatingPasswordEncoder) delegatingPasswordEncoder).setDefaultPasswordEncoderForMatches(NoOpPasswordEncoder.getInstance());
         }
         return delegatingPasswordEncoder;
+    }
+
+    @Bean
+    @ConditionalOnBean(RemoteAuthenticationService.class)
+    public RemoteAuthenticationFilter remoteAuthenticationFilter(RemoteAuthenticationService remoteAuthenticationService) {
+        return new RemoteAuthenticationFilter(new WebAuthenticationDetailsSource(), remoteAuthenticationService);
     }
 
     @Bean
