@@ -149,6 +149,11 @@ public class FinalSecurityAutoConfiguration {
             http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         });
 
+        applicationContext.getBeanProvider(RemoteAuthenticationFilter.class).ifAvailable(filter -> {
+            logger.info("addFilterBefore UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
+            http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        });
+
         applicationContext.getBeanProvider(UsernamePasswordAuthenticationFilter.class).ifAvailable(filter -> {
             logger.info("addFilterAt UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
             http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
