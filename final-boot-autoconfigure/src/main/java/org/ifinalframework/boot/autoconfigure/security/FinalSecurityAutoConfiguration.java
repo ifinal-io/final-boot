@@ -23,11 +23,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AnonymousConfigurer;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -158,23 +156,19 @@ public class FinalSecurityAutoConfiguration {
 
         final ResultAuthenticationHandler resultAuthenticationHandler = applicationContext.getBeanProvider(ResultAuthenticationHandler.class).getIfAvailable();
         // 表单登录
-        http.formLogin(new Customizer<FormLoginConfigurer<HttpSecurity>>() {
-            @Override
-            public void customize(FormLoginConfigurer<HttpSecurity> configurer) {
-                configurer.loginPage("/api/login").permitAll();
-                if(Objects.nonNull(resultAuthenticationHandler)){
-                    configurer.successHandler(resultAuthenticationHandler);
-                    configurer.failureHandler(resultAuthenticationHandler);
+        http.formLogin(configurer -> {
+            configurer.loginPage("/api/login").permitAll();
+            if (Objects.nonNull(resultAuthenticationHandler)) {
+                configurer.successHandler(resultAuthenticationHandler);
+                configurer.failureHandler(resultAuthenticationHandler);
 
-                }
             }
         });
 
         // 异常处理
-        if(Objects.nonNull(resultAuthenticationHandler)){
-                http.exceptionHandling(configurer -> configurer.accessDeniedHandler(resultAuthenticationHandler));
+        if (Objects.nonNull(resultAuthenticationHandler)) {
+            http.exceptionHandling(configurer -> configurer.accessDeniedHandler(resultAuthenticationHandler));
         }
-
 
         httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
 
