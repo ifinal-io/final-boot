@@ -22,8 +22,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AnonymousConfigurer;
@@ -41,18 +41,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import org.ifinalframework.boot.autoconfigure.web.cors.CorsProperties;
-import org.ifinalframework.core.result.R;
-import org.ifinalframework.core.result.Result;
-import org.ifinalframework.json.Json;
 import org.ifinalframework.security.config.HttpSecurityConfigurer;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationFailureHandler;
-import org.ifinalframework.security.web.authentication.ResultAuthenticationSuccessHandler;
+import org.ifinalframework.security.web.authentication.ResultAuthenticationHandler;
 import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
 import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationFilter;
 import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationService;
 import org.ifinalframework.util.CompositeProxies;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -146,7 +141,10 @@ public class FinalSecurityAutoConfiguration {
 
         http.csrf().disable();
 
-        http.logout().logoutUrl(securityProperties.getLogout().getUrl());
+        // 登出
+        http.logout(configurer -> {
+            configurer.logoutUrl(securityProperties.getLogout().getUrl());
+        });
 
         applicationContext.getBeanProvider(BearerAuthenticationFilter.class).ifAvailable(filter -> {
             logger.info("addFilterBefore UsernamePasswordAuthenticationFilter: {}", filter.getClass().getName());
@@ -158,20 +156,27 @@ public class FinalSecurityAutoConfiguration {
             http.addFilterAt(filter, UsernamePasswordAuthenticationFilter.class);
         });
 
+        final ResultAuthenticationHandler resultAuthenticationHandler = applicationContext.getBeanProvider(ResultAuthenticationHandler.class).getIfAvailable();
+        // 表单登录
+        http.formLogin(new Customizer<FormLoginConfigurer<HttpSecurity>>() {
+            @Override
+            public void customize(FormLoginConfigurer<HttpSecurity> configurer) {
+                configurer.loginPage("/api/login").permitAll();
+                if(Objects.nonNull(resultAuthenticationHandler)){
+                    configurer.successHandler(resultAuthenticationHandler);
+                    configurer.failureHandler(resultAuthenticationHandler);
 
-        FormLoginConfigurer<HttpSecurity> formLoginConfigurer = http.formLogin().loginPage("/api/login").permitAll();
-        applicationContext.getBeanProvider(ResultAuthenticationSuccessHandler.class).ifAvailable(formLoginConfigurer::successHandler);
-        applicationContext.getBeanProvider(ResultAuthenticationFailureHandler.class).ifAvailable(formLoginConfigurer::failureHandler);
-
-        httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
-
-        http.exceptionHandling().accessDeniedHandler((request, response, accessDeniedException) -> {
-            final Result<?> result = R.failure(403, "您没有权限访问：" + request.getMethod() + " " + request.getRequestURI());
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-            response.getWriter().write(Json.toJson(result));
+                }
+            }
         });
 
+        // 异常处理
+        if(Objects.nonNull(resultAuthenticationHandler)){
+                http.exceptionHandling(configurer -> configurer.accessDeniedHandler(resultAuthenticationHandler));
+        }
+
+
+        httpSecurityConfigurer.authorizeRequests(http.authorizeRequests());
 
         return http.build();
     }

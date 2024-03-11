@@ -45,8 +45,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.ifinalframework.security</groupId>
-            <artifactId>final-security-web</artifactId>
+            <groupId>org.ifinalframework</groupId>
+            <artifactId>final-security</artifactId>
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
