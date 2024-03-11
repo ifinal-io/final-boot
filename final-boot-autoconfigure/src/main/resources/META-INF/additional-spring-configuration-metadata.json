@@ -41,6 +41,12 @@
       "type": "java.lang.Boolean",
       "sourceType": "org.ifinalframework.context.beans.factory.ImportResourceBeanDefinitionRegistryPostProcessor",
       "defaultValue": true
+    },
+    {
+      "name": "spring.cloud.openfeign.gateway.url",
+      "type": "java.lang.String",
+      "description": "Spring Cloud openfeign 微服务网关地址.",
+      "sourceType": "org.ifinalframework.feign.bean.factory.FeignClientBeanDefinitionPostProcessor",
     }
   ],
   "hints": [
