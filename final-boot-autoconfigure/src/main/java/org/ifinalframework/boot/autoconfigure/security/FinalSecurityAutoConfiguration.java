@@ -44,7 +44,7 @@ import org.ifinalframework.security.web.authentication.ResultAuthenticationHandl
 import org.ifinalframework.security.web.authentication.www.BearerAuthenticationFilter;
 import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationFilter;
 import org.ifinalframework.security.web.authentication.www.RemoteAuthenticationService;
-import org.ifinalframework.util.CompositeProxies;
+import org.ifinalframework.util.Proxies;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,7 +79,7 @@ public class FinalSecurityAutoConfiguration {
     private final HttpSecurityConfigurer httpSecurityConfigurer;
 
     public FinalSecurityAutoConfiguration(ObjectProvider<List<HttpSecurityConfigurer>> httpSecurityConfigurer) {
-        this.httpSecurityConfigurer = CompositeProxies.composite(HttpSecurityConfigurer.class, httpSecurityConfigurer.getIfAvailable());
+        this.httpSecurityConfigurer = Proxies.composite(HttpSecurityConfigurer.class, httpSecurityConfigurer.getIfAvailable());
     }
 
     @Bean
